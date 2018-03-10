@@ -120,6 +120,6 @@ namespace AuthenticationService
         /// The location of the certificate on the machine.
         /// The server will not be able to run properly unless this variable is properly set.
         /// </summary>
-        private const string certificateLocation = "C:\\Users\\joshua\\Documents\\Visual Studio 2017\\Projects\\CallItLocal\\Certificate\\SENG401TenYears.pfx";
+        private const string certificateLocation = "C:\\Certificate\\SENG401TenYears.pfx";
     }
 }
