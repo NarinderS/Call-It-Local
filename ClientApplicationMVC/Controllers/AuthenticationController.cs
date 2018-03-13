@@ -30,9 +30,27 @@ namespace ClientApplicationMVC.Controllers
         public ActionResult LogIn(LogInRequest login)
         {
             //Do stuff with the new Login Info
+            LogInRequest request = login;
+            ServiceBusResponse response;
+            ServiceBusConnection connection = ConnectionManager.getConnectionObject(Globals.getUser());
+            if (connection == null)
+            {
+                response = ConnectionManager.sendLogIn(request);
+            }
+            else
+            {
+                response = connection.sendLogIn(request);
+            }
+
+            ViewBag.AsIsResponse = response.response;
+            //Do things with this response (if true then yay if not then nay :(   )
+
+
+
             return null;
         }
 
+        //Opens the page for creating a new account
         public ActionResult CreateAccount()
         {
             return View();
@@ -41,6 +59,20 @@ namespace ClientApplicationMVC.Controllers
         public ActionResult SaveAccount(CreateAccount account)
         {
             //Save this account info
+            CreateAccountRequest request = new CreateAccountRequest(account);
+            ServiceBusResponse response;
+            ServiceBusConnection connection = ConnectionManager.getConnectionObject(Globals.getUser());
+            if (connection == null)
+            {
+                response = ConnectionManager.sendNewAccountInfo(request);
+            }
+            else
+            {
+                response = connection.sendNewAccountInfo(request);
+            }
+
+            ViewBag.AsIsResponse = response.response;
+            //Do things with this response (if true then yay if not then nay :(   )
             return null;
         }
 
