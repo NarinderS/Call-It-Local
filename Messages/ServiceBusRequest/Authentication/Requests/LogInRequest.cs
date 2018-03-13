@@ -20,6 +20,10 @@ namespace Messages.ServiceBusRequest.Authentication.Requests
         /// </summary>
         public string password { get; set; }
 
+        public LogInRequest() : base(AuthenticationRequest.LogIn)
+        {
+
+        }
         public LogInRequest(string username, string password) : base(AuthenticationRequest.LogIn)
         {
             this.username = username;

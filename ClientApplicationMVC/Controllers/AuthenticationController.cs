@@ -27,7 +27,7 @@ namespace ClientApplicationMVC.Controllers
 		//This class is incomplete and should be completed by the students in milestone 2
 		//Hint: You will need to make use of the ServiceBusConnection class. See EchoController.cs for an example.
 
-        public ActionResult LogIn(LogInRequest login)
+        public ActionResult Login(LogInRequest login)
         {
             //Do stuff with the new Login Info
             LogInRequest request = login;
