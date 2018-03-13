@@ -10,7 +10,7 @@ namespace ClientApplicationMVC.Models
         /// <summary>
         /// The port to use when initializing a socket connection with the service bus
         /// </summary>
-        public const int serverPort = 11000;
+        public const int serverPort = 3306;
 
         /// <summary>
         /// The hostname of the service bus
