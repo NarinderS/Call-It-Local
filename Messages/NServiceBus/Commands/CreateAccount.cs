@@ -18,7 +18,6 @@ namespace Messages.NServiceBus.Commands
         /// The username of the new account
         /// </summary>
         [Required]
-        [RegularExpression(@"^(?=.*[A-Za-z])(?=.*\d)(?=.*[$@$!%*#?&])[A-Za-z\d$@$!%*#?&]{8,}$")]
         public string username { get; set; }
 
         /// <summary>
