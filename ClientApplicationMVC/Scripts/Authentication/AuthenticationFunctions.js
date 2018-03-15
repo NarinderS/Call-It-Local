@@ -2,6 +2,6 @@
 
 function checkInputs() { 
 
-    var user = ;
+    var user = $('form').serialize();
     alert(user);
 }
