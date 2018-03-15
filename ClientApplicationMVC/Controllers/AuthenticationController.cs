@@ -47,7 +47,7 @@ namespace ClientApplicationMVC.Controllers
 
 
 
-            return null;
+            return RedirectToAction("Index", "Home");
         }
 
         //Opens the page for creating a new account
@@ -73,7 +73,12 @@ namespace ClientApplicationMVC.Controllers
 
             ViewBag.AsIsResponse = response.response;
             //Do things with this response (if true then yay if not then nay :(   )
-            return null;
+            return RedirectToAction("Index" , "Home");
+        }
+
+        public ActionResult Logout()
+        {
+            return RedirectToAction("Index", "Home");
         }
 
     }
