@@ -60,7 +60,6 @@ namespace ClientApplicationMVC.Models
             else
             {
                 newConnection.close();
-                response.response = "RIP coun't make your account brahh, plz try againze l8r";
             }
 
             return response;
