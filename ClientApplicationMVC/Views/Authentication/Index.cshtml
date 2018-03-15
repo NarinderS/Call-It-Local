@@ -1,8 +1,10 @@
 ﻿@model Messages.ServiceBusRequest.Authentication.Requests.LogInRequest
 
+<head>
+    <script type="text/javascript" src="~/Scripts/Authentication/AuthenticationFunctions.js"></script>
+</head>
 
-
-@using (Html.BeginForm("Login", "Authentication"))
+@using (Html.BeginForm("Login", "Authentication", FormMethod.Post, new { enctype = "multipart/form-data", onsubmit = "return checkUsernamePassword(this)" }))
 {
     @Html.AntiForgeryToken()
 

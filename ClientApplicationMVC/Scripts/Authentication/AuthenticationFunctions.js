@@ -36,3 +36,15 @@ function checkInputs() {
     // Return true if all of the aforementioned conditions are satisifed
     return true;
 }
+
+function checkUsernamePassword() {
+    var username = getElementById("username").value;
+    var password = getElementById("password").value;
+
+    if (username.length == 0 || password.length == 0) {
+        alert("Please do not leave the 'username'/ 'password' input(s) empty");
+        return false;
+    }
+
+    return true;
+}
