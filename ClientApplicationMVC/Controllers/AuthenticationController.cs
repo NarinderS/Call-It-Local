@@ -20,8 +20,8 @@ namespace ClientApplicationMVC.Controllers
         /// <returns>The login page</returns>
         public ActionResult Index()
         {
-            ViewBag.Message = "Please enter your username and password.";
-            return View("Index");
+            ViewBag.AsIsResponse = "REGUALR";
+            return View();
         }
 		
 		//This class is incomplete and should be completed by the students in milestone 2
@@ -47,7 +47,7 @@ namespace ClientApplicationMVC.Controllers
 
 
 
-            return RedirectToAction("Index", "Home");
+            return View("Index");
         }
 
         //Opens the page for creating a new account
@@ -73,7 +73,9 @@ namespace ClientApplicationMVC.Controllers
 
             ViewBag.AsIsResponse = response.response;
             //Do things with this response (if true then yay if not then nay :(   )
-            return RedirectToAction("Index" , "Home");
+
+
+            return View("Index");
         }
 
         public ActionResult Logout()
