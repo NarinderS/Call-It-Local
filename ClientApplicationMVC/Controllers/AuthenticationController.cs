@@ -75,6 +75,10 @@ namespace ClientApplicationMVC.Controllers
             ViewBag.AsIsResponse = response.response;
             //Do things with this response (if true then yay if not then nay :(   )
 
+            if(response.response.Contains("Duplicate")){
+                return View("CreateAccount");
+            }
+
 
             return View("Index");
         }
