@@ -3,6 +3,7 @@
 using Messages.DataTypes;
 
 using System;
+using System.ComponentModel.DataAnnotations;
 
 namespace Messages.NServiceBus.Commands
 {
@@ -16,31 +17,38 @@ namespace Messages.NServiceBus.Commands
         /// <summary>
         /// The username of the new account
         /// </summary>
+        [Required]
+        [RegularExpression(@"^(?=.*[A-Za-z])(?=.*\d)(?=.*[$@$!%*#?&])[A-Za-z\d$@$!%*#?&]{8,}$")]
         public string username { get; set; }
 
         /// <summary>
         /// The password for the new account
         /// </summary>
+        [Required]
         public string password { get; set; }
 
         /// <summary>
         /// The address of the new user
         /// </summary>
+        [Required]
         public string address { get; set; }
 
         /// <summary>
         /// The phone number of the new user
         /// </summary>
+        [Required]
         public string phonenumber { get; set; }
 
         /// <summary>
         /// the email of the new user
         /// </summary>
+        [Required]
         public string email { get; set; }
 
         /// <summary>
         /// The type of account
         /// </summary>
+        [Required]
         public AccountType type { get; set; }
     }
 }
