@@ -1,0 +1,13 @@
+﻿div.navbar {
+    background-color: #e3f2fd;
+    border-color: #e3f2fd;
+}
+
+.navbar-inverse .navbar-nav > li > a {
+    color: black;
+    font-size: 13pt;
+}
+
+.navbar-inverse .navbar-brand {
+    color: #337ab7;
+}
