@@ -78,6 +78,7 @@ namespace ClientApplicationMVC.Controllers
 
         public ActionResult Logout()
         {
+            Globals.setUser("Log In");
             return RedirectToAction("Index", "Home");
         }
 
