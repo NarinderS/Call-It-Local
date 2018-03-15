@@ -20,9 +20,9 @@ function checkInputs() {
     }
 
     // Checks to make sure the phone number is formatted properly
-    var phoneRegex = /^\(?([0-9]{3})\)?[-. ]?([0-9]{3})[-. ]?([0-9]{4})$/;
+    var phoneRegex = /^[0-9]{10}$/;
     if (!phoneRegex.test(phonenumber)) {
-        alert("Please enter your number in the format 'XXX-XXX-XXXX' or 'XXX XXX XXXX'");
+        alert("Please enter your number in the format 'XXXXXXXXXX'");
         return false;
     }
 
