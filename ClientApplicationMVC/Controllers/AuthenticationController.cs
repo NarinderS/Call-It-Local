@@ -6,6 +6,7 @@ using Messages.ServiceBusRequest;
 using Messages.ServiceBusRequest.Authentication.Requests;
 
 using System.Web.Mvc;
+using System.Net;
 
 namespace ClientApplicationMVC.Controllers
 {

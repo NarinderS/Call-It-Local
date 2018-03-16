@@ -29,12 +29,12 @@ namespace ClientApplicationMVC.Models
             {
                 addConnection(request.username, newConnection);
                 Globals.setUser(request.username);
-                response.response = "AWESOME YOU ARE LOGGED IN YAY!!!!!!!!!!";
+                response.response = "Login successfull";
             }
             else
             {
                 newConnection.close();
-                response.response = "Incorrect Username and/or Password or something :( 404 ERROOROROROROS OH NOES";
+                response.response = "Incorrect Username and/or Password";
             }
 
             return response;
@@ -55,7 +55,7 @@ namespace ClientApplicationMVC.Models
             {
                 addConnection(request.createCommand.username, newConnection);
                 Globals.setUser(request.createCommand.username);
-                response.response = "AWESOME YOU ARE LOGGED IN YAY!!!!!!!!!!";
+                response.response = "Login successfull";
             }
             else
             {
