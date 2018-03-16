@@ -21,7 +21,7 @@ namespace ClientApplicationMVC.Controllers
         /// <returns>The login page</returns>
         public ActionResult Index()
         {
-            ViewBag.AsIsResponse = "REGUALR";
+            ViewBag.AsIsResponse = "";
             return View();
         }
 		
