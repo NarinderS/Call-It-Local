@@ -221,7 +221,7 @@ namespace Messages.Database
         /// <summary>
         /// This is the password used to login to the database by the connection
         /// </summary>
-        private const string Password = "I7N-r-X}r_p7t!Y6";
+        private const string Password = "297080004";
 
         /// <summary>
         /// This is the name of the database. This property must be defined by the inheriting class
