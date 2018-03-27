@@ -1,4 +1,5 @@
-﻿using Messages;
+﻿using CompanyService.Handlers;
+using Messages;
 using Messages.Database;
 using Messages.DataTypes;
 using Messages.NServiceBus.Events;
@@ -12,7 +13,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace EchoService.Database
+namespace CompanyService.Database
 {
     /// <summary>
     /// This portion of the class contains methods and functions
@@ -31,7 +32,7 @@ namespace EchoService.Database
         }
 
         //WRITE QUERY 
-        public void saveAccount(AccountCreated account)
+        public void saveAccount(AccountCreatedEvent account)
         {
             if (openConnection() == true)
             {
