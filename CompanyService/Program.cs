@@ -1,4 +1,5 @@
-﻿using NServiceBus;
+﻿using Messages.NServiceBus.Events;
+using NServiceBus;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -51,8 +52,8 @@ namespace CompanyService
             //This variable is used to configure how messages are routed. Using this, you may set the default reciever of a particular command, and/or subscribe to any number of events
             var routing = transport.Routing();
 
-            //Register to the AsIsEcho event published by the Authentication endpoint
-            routing.RegisterPublisher(typeof(AsIsEchoEvent), "Authentication");
+            //Register to the AccountCreated event published by the Authentication endpoint
+            routing.RegisterPublisher(typeof(AccountCreated), "Authentication");
 
             //Start the endpoint with the configuration defined above. It should be noted that any changes made to the endpointConfiguration after an endpoint is instantiated will not apply to any endpoints that have already been instantiated
             var endpointInstance = await Endpoint.Start(endpointConfiguration).ConfigureAwait(false);
