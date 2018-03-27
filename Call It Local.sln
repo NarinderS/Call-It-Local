@@ -11,6 +11,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AuthenticationService", "Au
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EchoService", "EchoService\EchoService.csproj", "{675CF9B0-47F1-49B8-9A67-87560220FDA8}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CompanyService", "CompanyService\CompanyService.csproj", "{7F382A89-8339-4948-8871-3BB2018C656A}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -33,6 +35,10 @@ Global
 		{675CF9B0-47F1-49B8-9A67-87560220FDA8}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{675CF9B0-47F1-49B8-9A67-87560220FDA8}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{675CF9B0-47F1-49B8-9A67-87560220FDA8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7F382A89-8339-4948-8871-3BB2018C656A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7F382A89-8339-4948-8871-3BB2018C656A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7F382A89-8339-4948-8871-3BB2018C656A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7F382A89-8339-4948-8871-3BB2018C656A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

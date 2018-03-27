@@ -48,6 +48,6 @@ namespace Messages.NServiceBus.Commands
         /// The type of account
         /// </summary>
         [Required]
-        public AccountType type { get; set; }
+        public virtual AccountType type { get; set; }
     }
 }
