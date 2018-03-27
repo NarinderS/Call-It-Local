@@ -32,7 +32,7 @@ namespace CompanyService.Database
         }
 
         //WRITE QUERY 
-        public void saveAccount(AccountCreatedEvent account)
+        public void saveAccount(AccountCreated account)
         {
             if (openConnection() == true)
             {

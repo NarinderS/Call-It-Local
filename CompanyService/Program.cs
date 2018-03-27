@@ -1,4 +1,6 @@
-﻿using Messages.NServiceBus.Events;
+﻿using CompanyService.Database;
+using Messages;
+using Messages.NServiceBus.Events;
 using NServiceBus;
 using System;
 using System.Collections.Generic;
@@ -68,11 +70,11 @@ namespace CompanyService
                 switch (entry)
                 {
                     case ("DELETEDB"):
-                        EchoServiceDatabase.getInstance().deleteDatabase();
+                        CompanyServiceDatabase.getInstance().deleteDatabase();
                         Debug.consoleMsg("Delete database attempt complete");
                         break;
                     case ("CREATEDB"):
-                        EchoServiceDatabase.getInstance().createDB();
+                        CompanyServiceDatabase.getInstance().createDB();
                         Debug.consoleMsg("Completed Database Creation Attempt.");
                         break;
                     default:
