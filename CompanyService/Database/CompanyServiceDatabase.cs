@@ -72,7 +72,7 @@ namespace CompanyService.Database
         }
 
         //WRITE QUERY 
-        public CompanyList searchCompanies()
+        public CompanyList searchCompanies(string searchString)
         {
             if (openConnection() == true)
             {
