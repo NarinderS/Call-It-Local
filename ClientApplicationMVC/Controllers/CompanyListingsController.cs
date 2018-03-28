@@ -7,6 +7,7 @@ using Messages.ServiceBusRequest.CompanyDirectory.Requests;
 using System;
 using System.Web.Mvc;
 using System.Web.Routing;
+using Messages.ServiceBusRequest;
 
 namespace ClientApplicationMVC.Controllers
 {
@@ -49,13 +50,15 @@ namespace ClientApplicationMVC.Controllers
 
             CompanySearchRequest request = new CompanySearchRequest(textCompanyName);
 
-            CompanySearchResponse response = connection.searchCompanyByName(request);
+            ServiceBusResponse response = connection.searchCompanyByName(request);
             if (response.result == false)
             {
                 return RedirectToAction("Index", "Authentication");
             }
 
-            ViewBag.Companylist = response.list;
+
+
+            ViewBag.Companylist = response.response.Split(new String[] { ";" }, StringSplitOptions.RemoveEmptyEntries);
 
             return View("Index");
         }
@@ -85,8 +88,18 @@ namespace ClientApplicationMVC.Controllers
             ViewBag.CompanyName = id;
 
             GetCompanyInfoRequest infoRequest = new GetCompanyInfoRequest(new CompanyInstance(id));
-            GetCompanyInfoResponse infoResponse = connection.getCompanyInfo(infoRequest);
-            ViewBag.CompanyInfo = infoResponse.companyInfo;
+            ServiceBusResponse infoResponse = connection.getCompanyInfo(infoRequest);
+
+
+
+
+            String[] responseToArray = infoResponse.response.Split(new String[] { ";" }, StringSplitOptions.RemoveEmptyEntries);
+            String[] locations = new String[responseToArray.Length - 3];
+
+            Array.Copy(responseToArray, 3, locations, 0, responseToArray.Length - 3);
+            CompanyInstance value = new CompanyInstance(responseToArray[0], responseToArray[1], responseToArray[2], locations);
+
+            ViewBag.CompanyInfo = value;
 
             return View("DisplayCompany");
         }

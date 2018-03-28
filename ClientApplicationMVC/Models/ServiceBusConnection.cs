@@ -61,15 +61,17 @@ namespace ClientApplicationMVC.Models
         //Milestone 3 starts here boyz
         #region CompanyMessages
         //TODO: CHANGE RETURN TYPE TO ServiceBusResponse
-        public CompanySearchResponse searchCompanyByName(CompanySearchRequest request)
+        public ServiceBusResponse searchCompanyByName(CompanySearchRequest request)
         {
-            return null;
+            send(request);
+            return readUntilEOF();
         }
 
         //TODO: CHANGE RETURN TYPE TO ServiceBusResponse
-        public GetCompanyInfoResponse getCompanyInfo(GetCompanyInfoRequest request)
+        public ServiceBusResponse getCompanyInfo(GetCompanyInfoRequest request)
         {
-            return null;
+            send(request);
+            return readUntilEOF();
         }
         #endregion CompanyMessages
 
