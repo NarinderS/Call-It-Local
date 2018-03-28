@@ -52,7 +52,7 @@ namespace CompanyService.Database
         }
 
         //WRITE QUERY 
-        public CompanyInstance getCompanyInfo()
+        public CompanyInstance getCompanyInfo(string companyName)
         {
             if (openConnection() == true)
             {
