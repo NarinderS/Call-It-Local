@@ -9,6 +9,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Messages.NServiceBus.Commands;
+using Messages.ServiceBusRequest.CompanyDirectory.Requests;
 
 namespace CompanyService
 {
@@ -58,6 +59,8 @@ namespace CompanyService
 
             //Register to the AccountCreated event published by the Authentication endpoint
             routing.RegisterPublisher(typeof(AccountCreated), "Authentication");
+            routing.RegisterPublisher(typeof(CompanyEvent), "Authentication");
+
 
             //Start the endpoint with the configuration defined above. It should be noted that any changes made to the endpointConfiguration after an endpoint is instantiated will not apply to any endpoints that have already been instantiated
             var endpointInstance = await Endpoint.Start(endpointConfiguration).ConfigureAwait(false);

@@ -1,5 +1,6 @@
 ﻿
 using CompanyService.Database;
+using Messages;
 using Messages.NServiceBus.Events;
 using NServiceBus;
 using NServiceBus.Logging;
@@ -24,7 +25,10 @@ namespace CompanyService.Handlers
 
         public Task Handle(AccountCreated message, IMessageHandlerContext context)
         {
+
+            
             CompanyServiceDatabase.getInstance().saveAccount(message);
+            Debug.consoleMsg("Account has been saved");
             return Task.CompletedTask;
         }
     }

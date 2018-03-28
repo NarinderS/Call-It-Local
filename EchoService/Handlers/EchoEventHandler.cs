@@ -1,5 +1,5 @@
 ﻿using EchoService.Database;
-
+using Messages;
 using Messages.NServiceBus.Events;
 
 using NServiceBus;
@@ -32,6 +32,7 @@ namespace EchoService.Handlers
         /// <returns>Nothing</returns>
         public Task Handle(AsIsEchoEvent message, IMessageHandlerContext context)
         {
+            Debug.consoleMsg("Got to EchoEventHandler");
             EchoServiceDatabase.getInstance().saveAsIsEcho(message);
             return Task.CompletedTask;
         }

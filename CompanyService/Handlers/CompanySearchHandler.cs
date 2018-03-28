@@ -1,7 +1,10 @@
 ﻿using CompanyService.Database;
+using Messages;
 using Messages.DataTypes.Database.CompanyDirectory;
+using Messages.NServiceBus.Events;
 using Messages.ServiceBusRequest;
 using Messages.ServiceBusRequest.CompanyDirectory.Requests;
+using Messages.ServiceBusRequest.CompanyDirectory.Responses;
 using NServiceBus;
 using NServiceBus.Logging;
 using System;
@@ -12,7 +15,7 @@ using System.Threading.Tasks;
 
 namespace CompanyService.Handlers
 {
-    class CompanySearchHandler
+    class CompanySearchHandler : IHandleMessages<CompanySearchRequest>
     {
         /// <summary>
         /// This is a class provided by NServiceBus. Its main purpose is to be use log.Info() instead of Messages.Debug.consoleMsg().
@@ -30,11 +33,18 @@ namespace CompanyService.Handlers
         /// <returns>The response to be sent back to the calling process</returns>
         public Task Handle(CompanySearchRequest message, IMessageHandlerContext context)
         {
+            Debug.consoleMsg("Got to CompanySearchHandler");
+            Debug.consoleMsg(message.searchDeliminator);
             //Save the echo to the database
             CompanyList temp = CompanyServiceDatabase.getInstance().searchCompanies(message.searchDeliminator);
 
+            //Format the company list so it looks like what it is below, With ; dividing the different companies //NARINDER
+            string response = "Google;Microsoft;Amazon";
+
+
+            Debug.consoleMsg(response);
             //The context is used to give a reply back to the endpoint that sent the request
-            return context.Reply(new ServiceBusResponse(true, temp.ToString()));
+            return context.Reply(new CompanySearchResponse(true, response, temp));
         }
     }
 }

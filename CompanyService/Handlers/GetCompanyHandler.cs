@@ -1,4 +1,5 @@
 ﻿using CompanyService.Database;
+using Messages;
 using Messages.DataTypes.Database.CompanyDirectory;
 using Messages.ServiceBusRequest;
 using Messages.ServiceBusRequest.CompanyDirectory.Requests;
@@ -12,7 +13,7 @@ using System.Threading.Tasks;
 
 namespace CompanyService.Handlers
 {
-    class GetCompanyHandler
+    class GetCompanyHandler : IHandleMessages<GetCompanyInfoRequest>
     {
         /// <summary>
         /// This is a class provided by NServiceBus. Its main purpose is to be use log.Info() instead of Messages.Debug.consoleMsg().
@@ -30,11 +31,16 @@ namespace CompanyService.Handlers
         /// <returns>The response to be sent back to the calling process</returns>
         public Task Handle(GetCompanyInfoRequest message, IMessageHandlerContext context)
         {
-            //Save the echo to the database
+            Debug.consoleMsg("Got to GetCompanyInfoHandler");
+
             CompanyInstance temp = CompanyServiceDatabase.getInstance().getCompanyInfo(message.companyInfo.companyName);
 
+            //Format the company list so it looks like what it is below, With ; dividing the different companies //NARINDER
+            string response = "Google;4031234567;gake@gmail.com;California";
+
+
             //The context is used to give a reply back to the endpoint that sent the request
-            return context.Reply(new ServiceBusResponse(true, temp.ToString()));
+            return context.Reply(new ServiceBusResponse(true, response));
         }
     }
 }

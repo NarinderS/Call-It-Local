@@ -19,16 +19,18 @@
 
     
 }
+<h1>@ViewBag.DM</h1>
 @if (ViewBag.Companylist != null)
 {
-    if (ViewBag.Companylist.companyNames.Length == 0)
+    
+    if (ViewBag.Companylist.Length == 0)
     {
         <p>Your search did not retrun any results. Please try again.</p>
     }
     else
     {
         <p style="font-size:larger">Results:</p> <br />
-        foreach (string item in ViewBag.Companylist.companyNames)
+        foreach (string item in ViewBag.Companylist)
         {
             @Html.ActionLink(item, "DisplayCompany/" + item, "CompanyListings")
             <br/>

@@ -25,9 +25,11 @@ namespace ClientApplicationMVC.Controllers
             if (Globals.isLoggedIn())
             {
                 ViewBag.Companylist = null;
+                
                 return View("Index");
             }
-            return RedirectToAction("Index", "Authentication");
+            ViewBag.DebugMessage = "User Is not logged in (global)";
+            return View("Index");
         }
 
         /// <summary>
@@ -39,13 +41,15 @@ namespace ClientApplicationMVC.Controllers
 
             if (Globals.isLoggedIn() == false)
             {
-                return RedirectToAction("Index", "Authentication");
+                ViewBag.DM = "User Is not logged in";
+                return View("Index");
             }
 
             ServiceBusConnection connection = ConnectionManager.getConnectionObject(Globals.getUser());
             if(connection == null)
             {
-                return RedirectToAction("Index", "Authentication");
+                ViewBag.DM = "Connection is null";
+                return View("Index");
             }
 
             CompanySearchRequest request = new CompanySearchRequest(textCompanyName);
@@ -53,13 +57,14 @@ namespace ClientApplicationMVC.Controllers
             ServiceBusResponse response = connection.searchCompanyByName(request);
             if (response.result == false)
             {
-                return RedirectToAction("Index", "Authentication");
+                ViewBag.DM = response.response;
+                return View("Index");
             }
 
 
 
             ViewBag.Companylist = response.response.Split(new String[] { ";" }, StringSplitOptions.RemoveEmptyEntries);
-
+            ViewBag.DM = response.response;
             return View("Index");
         }
 
