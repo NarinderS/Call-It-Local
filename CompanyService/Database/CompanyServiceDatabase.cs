@@ -2,6 +2,7 @@
 using Messages;
 using Messages.Database;
 using Messages.DataTypes;
+using Messages.NServiceBus.Commands;
 using Messages.NServiceBus.Events;
 using Messages.ServiceBusRequest.Echo.Requests;
 
@@ -46,6 +47,46 @@ namespace CompanyService.Database
             else
             {
                 Debug.consoleMsg("Unable to connect to database");
+            }
+        }
+
+        //WRITE QUERY 
+        public CreateAccount getCompanyInfo()
+        {
+            if (openConnection() == true)
+            {
+                string query = "";
+
+                MySqlCommand command = new MySqlCommand(query, connection);
+                command.ExecuteNonQuery();
+
+                closeConnection();
+                return null;
+            }
+            else
+            {
+                Debug.consoleMsg("Unable to connect to database");
+                return null;
+            }
+        }
+
+        //WRITE QUERY 
+        public List<CreateAccount> searchCompanies()
+        {
+            if (openConnection() == true)
+            {
+                string query = "";
+
+                MySqlCommand command = new MySqlCommand(query, connection);
+                command.ExecuteNonQuery();
+
+                closeConnection();
+                return null;
+            }
+            else
+            {
+                Debug.consoleMsg("Unable to connect to database");
+                return null;
             }
         }
     }
