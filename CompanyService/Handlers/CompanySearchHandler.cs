@@ -1,4 +1,7 @@
-﻿using Messages.ServiceBusRequest.CompanyDirectory.Requests;
+﻿using CompanyService.Database;
+using Messages.DataTypes.Database.CompanyDirectory;
+using Messages.ServiceBusRequest;
+using Messages.ServiceBusRequest.CompanyDirectory.Requests;
 using NServiceBus;
 using NServiceBus.Logging;
 using System;
@@ -27,7 +30,13 @@ namespace CompanyService.Handlers
         /// <returns>The response to be sent back to the calling process</returns>
         public Task Handle(CompanySearchRequest message, IMessageHandlerContext context)
         {
+            //Save the echo to the database
+            CompanyList temp = CompanyServiceDatabase.getInstance().searchCompanies(message.searchDeliminator);
 
+            
+
+            //The context is used to give a reply back to the endpoint that sent the request
+            return context.Reply(new ServiceBusResponse(true, temp.ToString()));
         }
     }
 }
