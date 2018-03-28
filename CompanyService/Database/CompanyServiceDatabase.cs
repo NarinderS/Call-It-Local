@@ -33,15 +33,35 @@ namespace CompanyService.Database
             return instance;
         }
 
-        //WRITE QUERY 
         public void saveAccount(AccountCreated account)
         {
-            if (openConnection() == true)
+            if(openConnection() == true)
             {
-                string query = "";
+                string query = "INSERT INTO accounts(username, password, address, phonenumber, email, type)" +
+                    "VALUES('" + account.username + "','" + account.password + "','" + account.address + "','" + account.phonenumber + "','" + account.email + "','" + account.type.ToString() + "');";
 
                 MySqlCommand command = new MySqlCommand(query, connection);
                 command.ExecuteNonQuery();
+                closeConnection();
+            } else
+            {
+                Debug.consoleMsg("Unable to connect to database");
+            }
+        }
+
+        // will throw error if it cannot save company
+        public void saveCompany(CompanyInstance company)
+        {
+            if (openConnection() == true)
+            {
+                for (int i = 0; i < company.locations.Length; i++)
+                {
+                    string query = "INSERT INTO companies(companyName,phoneNumber,email,locations)" +
+                        "VALUES('" + company.companyName + "','" + company.phoneNumber + "','" + company.email + "','" + company.locations[i] + "');";
+
+                    MySqlCommand command = new MySqlCommand(query, connection);
+                    command.ExecuteNonQuery();
+                }
 
                 closeConnection();
             }
@@ -51,18 +71,33 @@ namespace CompanyService.Database
             }
         }
 
-        //WRITE QUERY 
+        // will return null if cannot get company info
         public CompanyInstance getCompanyInfo(string companyName)
         {
             if (openConnection() == true)
             {
-                string query = "";
+                string query = "SELECT * FROM " + dbname + ".companies"+" WHERE companyName='"+companyName+"';";
 
                 MySqlCommand command = new MySqlCommand(query, connection);
-                command.ExecuteNonQuery();
-
+                MySqlDataReader reader = command.ExecuteReader();
+                CompanyInstance ret = new CompanyInstance(companyName);
+                List<string> locs = new List<string>();
+                if (reader.Read())
+                    do
+                    {
+                        ret.email = reader.GetString("email");
+                        locs.Add(reader.GetString("locations"));
+                        ret.phoneNumber = reader.GetString("phonenumber");
+                    } while (reader.Read());
+                else
+                {
+                    Debug.consoleMsg("Error: No such company: '" + companyName + "' in database");
+                    return null;
+                }
+                ret.locations = locs.ToArray<string>();
+                
                 closeConnection();
-                return null;
+                return ret;
             }
             else
             {
@@ -71,18 +106,30 @@ namespace CompanyService.Database
             }
         }
 
-        //WRITE QUERY 
+        // will return null if unable to connect to database,
+        // CompanyList.companyNames will be empty if could not find any company
         public CompanyList searchCompanies(string searchString)
         {
             if (openConnection() == true)
             {
-                string query = "";
+                string query = "SELECT * FROM " + dbname + ".companies" + " WHERE companyName LIKE '%" + searchString + "%';";
 
                 MySqlCommand command = new MySqlCommand(query, connection);
-                command.ExecuteNonQuery();
+                MySqlDataReader reader = command.ExecuteReader();
+
+                CompanyList ret = new CompanyList();
+                List<string> compNames = new List<string>();
+
+                while (reader.Read())
+                {
+                    string toAdd = reader.GetString("companyName");
+                    if(!compNames.Contains(toAdd))
+                        compNames.Add(toAdd);
+                }
+                ret.companyNames = compNames.ToArray<string>();
 
                 closeConnection();
-                return null;
+                return ret;
             }
             else
             {
@@ -113,8 +160,106 @@ namespace CompanyService.Database
         /// </summary>
         protected override Table[] tables { get; } =
         {
-            
-            
+            new Table
+            (
+                dbname,
+                "companies",
+                new Column[]
+                {
+                    new Column
+                    (
+                        "companyName", "VARCHAR(100)",
+                        new string[]
+                        {
+                            "NOT NULL",
+                        }, false
+                    ),
+                    new Column
+                    (
+                        "phoneNumber", "VARCHAR(10)",
+                        new string[]
+                        {
+                            "NOT NULL",
+                        }, false
+                    ),
+                    new Column
+                    (
+                        "email", "VARCHAR(100)",
+                        new string[]
+                        {
+                            "NOT NULL",
+                        }, false
+                    ),
+                    new Column
+                    (
+                        "locations", "VARCHAR(100)",
+                        new string[]
+                        {
+                            "NOT NULL",
+                            "UNIQUE"
+                        }, true
+                    )
+                }
+            ),
+
+            new Table
+            (
+                dbname,
+                "accounts",
+                new Column[]
+                {
+                    new Column
+                    (
+                        "username", "VARCHAR(100)",
+                        new string[]
+                        {
+                            "NOT NULL",
+                            "UNIQUE"
+                        }, true
+                    ),
+                    new Column
+                    (
+                        "password", "VARCHAR(100)",
+                        new string[]
+                        {
+                            "NOT NULL",
+                        }, false
+                    ),
+                    new Column
+                    (
+                        "address", "VARCHAR(100)",
+                        new string[]
+                        {
+                            "NOT NULL",
+                        }, false
+                    ),
+                    new Column
+                    (
+                        "phonenumber", "VARCHAR(10)",
+                        new string[]
+                        {
+                            "NOT NULL",
+                        }, false
+                    ),
+                    new Column
+                    (
+                        "email", "VARCHAR(100)",
+                        new string[]
+                        {
+                            "NOT NULL",
+                        }, false
+                    ),
+                    new Column
+                    (
+                        "type", "ENUM('business','notspecified','user')",
+                        new string[]
+                        {
+                            "NOT NULL",
+                            "UNIQUE"
+                        }, false
+                    )
+                }
+            )
         };
     }
 

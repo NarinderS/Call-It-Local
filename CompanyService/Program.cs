@@ -4,9 +4,11 @@ using Messages.NServiceBus.Events;
 using NServiceBus;
 using System;
 using System.Collections.Generic;
+using Messages.DataTypes.Database.CompanyDirectory;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Messages.NServiceBus.Commands;
 
 namespace CompanyService
 {
@@ -17,7 +19,23 @@ namespace CompanyService
         /// </summary>
         static void Main(string[] args)
         {
-            AsyncMain().GetAwaiter().GetResult();
+            //CompanyList list = CompanyServiceDatabase.getInstance().searchCompanies("est");
+            //foreach (string i in list.companyNames)
+            //    Debug.consoleMsg(i);
+
+
+            CreateAccount create = new CreateAccount();
+            create.username = "username";
+            create.password = "password";
+            create.address = "address";
+            create.email = "email@email.com";
+            create.phonenumber = "1231231234";
+            create.type = Messages.DataTypes.AccountType.business;
+
+            AccountCreated created = new AccountCreated(create);
+            CompanyServiceDatabase.getInstance().saveAccount(created);
+            
+            //AsyncMain().GetAwaiter().GetResult();
         }
 
 
