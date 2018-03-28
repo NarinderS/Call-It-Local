@@ -33,8 +33,6 @@ namespace CompanyService.Handlers
             //Save the echo to the database
             CompanyList temp = CompanyServiceDatabase.getInstance().searchCompanies(message.searchDeliminator);
 
-            
-
             //The context is used to give a reply back to the endpoint that sent the request
             return context.Reply(new ServiceBusResponse(true, temp.ToString()));
         }

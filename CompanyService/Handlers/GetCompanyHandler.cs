@@ -1,4 +1,5 @@
 ﻿using CompanyService.Database;
+using Messages.DataTypes.Database.CompanyDirectory;
 using Messages.ServiceBusRequest;
 using Messages.ServiceBusRequest.CompanyDirectory.Requests;
 using NServiceBus;
@@ -29,7 +30,11 @@ namespace CompanyService.Handlers
         /// <returns>The response to be sent back to the calling process</returns>
         public Task Handle(GetCompanyInfoRequest message, IMessageHandlerContext context)
         {
-            
+            //Save the echo to the database
+            CompanyInstance temp = CompanyServiceDatabase.getInstance().getCompanyInfo(message.companyInfo.companyName);
+
+            //The context is used to give a reply back to the endpoint that sent the request
+            return context.Reply(new ServiceBusResponse(true, temp.ToString()));
         }
     }
 }

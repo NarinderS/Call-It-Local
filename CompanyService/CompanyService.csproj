@@ -59,6 +59,8 @@
   <ItemGroup>
     <Compile Include="Database\CompanyServiceDatabase.cs" />
     <Compile Include="Handlers\AccountCreatedHandler.cs" />
+    <Compile Include="Handlers\CompanySearchHandler.cs" />
+    <Compile Include="Handlers\GetCompanyHandler.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
