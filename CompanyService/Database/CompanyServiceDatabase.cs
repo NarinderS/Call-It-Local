@@ -2,6 +2,7 @@
 using Messages;
 using Messages.Database;
 using Messages.DataTypes;
+using Messages.DataTypes.Database.CompanyDirectory;
 using Messages.NServiceBus.Commands;
 using Messages.NServiceBus.Events;
 using Messages.ServiceBusRequest.Echo.Requests;
@@ -51,7 +52,7 @@ namespace CompanyService.Database
         }
 
         //WRITE QUERY 
-        public CreateAccount getCompanyInfo()
+        public CompanyInstance getCompanyInfo()
         {
             if (openConnection() == true)
             {
@@ -71,7 +72,7 @@ namespace CompanyService.Database
         }
 
         //WRITE QUERY 
-        public List<CreateAccount> searchCompanies()
+        public CompanyList searchCompanies()
         {
             if (openConnection() == true)
             {
