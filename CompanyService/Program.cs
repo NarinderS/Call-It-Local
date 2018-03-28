@@ -19,23 +19,7 @@ namespace CompanyService
         /// </summary>
         static void Main(string[] args)
         {
-            //CompanyList list = CompanyServiceDatabase.getInstance().searchCompanies("est");
-            //foreach (string i in list.companyNames)
-            //    Debug.consoleMsg(i);
-
-
-            CreateAccount create = new CreateAccount();
-            create.username = "username";
-            create.password = "password";
-            create.address = "address";
-            create.email = "email@email.com";
-            create.phonenumber = "1231231234";
-            create.type = Messages.DataTypes.AccountType.business;
-
-            AccountCreated created = new AccountCreated(create);
-            CompanyServiceDatabase.getInstance().saveAccount(created);
-            
-            //AsyncMain().GetAwaiter().GetResult();
+            AsyncMain().GetAwaiter().GetResult();
         }
 
 
