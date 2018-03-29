@@ -38,14 +38,15 @@ namespace ClientApplicationMVC.Controllers
         }
 
         // GET: Company Reviews
-        public HttpResponseMessage GetCompanyReview(String companyName) 
+        public String GetCompanyReview(String companyName) 
         {
             HttpClient client = new HttpClient();
 
             // TODO: Put actual URI of assignment 4
             var result = client.GetAsync("http://localhost/api/Reviews/" + companyName);
 
-            return result.Result;
+            var body = result.Result;
+            return body.ToString();
         }
     }
 }
