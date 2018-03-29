@@ -37,12 +37,19 @@ namespace CompanyService.Database
         {
             if(openConnection() == true)
             {
+                /*
                 string query = "INSERT INTO accounts(username, password, address, phonenumber, email, type)" +
                     "VALUES('" + account.username + "','" + account.password + "','" + account.address + "','" + account.phonenumber + "','" + account.email + "','" + account.type.ToString() + "');";
                 System.Diagnostics.Debug.WriteLine(query);
-                MySqlCommand command = new MySqlCommand(query, connection);
-                command.ExecuteNonQuery();
-                closeConnection();
+                */
+                
+                
+                    string query = "INSERT INTO companies(companyName,phoneNumber,email,locations)" +
+                        "VALUES('" + account.username + "','" + account.phonenumber + "','" + account.email + "','" + account.address + "');";
+
+                    MySqlCommand command = new MySqlCommand(query, connection);
+                    command.ExecuteNonQuery();
+                
             } else
             {
                 Debug.consoleMsg("Unable to connect to database");

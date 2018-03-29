@@ -25,10 +25,14 @@ namespace CompanyService.Handlers
 
         public Task Handle(AccountCreated message, IMessageHandlerContext context)
         {
+            Debug.consoleMsg(message.type.ToString());
+            if (message.type.ToString().Equals("business"))
+            {
 
+                CompanyServiceDatabase.getInstance().saveAccount(message);
+                Debug.consoleMsg("Account has been saved");
+            }
             
-            CompanyServiceDatabase.getInstance().saveAccount(message);
-            Debug.consoleMsg("Account has been saved");
             return Task.CompletedTask;
         }
     }
