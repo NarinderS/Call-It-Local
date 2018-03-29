@@ -38,7 +38,7 @@ namespace ClientApplicationMVC.Controllers
         }
 
         // GET: Company Reviews
-        public String GetCompanyReview(String companyName) 
+        public ActionResult GetCompanyReview(String companyName) 
         {
             HttpClient client = new HttpClient();
 
@@ -46,7 +46,8 @@ namespace ClientApplicationMVC.Controllers
             var result = client.GetAsync("http://localhost/api/Reviews/" + companyName);
 
             var body = result.Result;
-            return body.ToString();
+            var returnValue = body.ToString();
+            return View(returnValue);
         }
     }
 }

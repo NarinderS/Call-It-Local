@@ -18,33 +18,32 @@
     <br />
 }
 
-
-<div style="height:100px">
-    <h4>Reviews for this Company:</h4>
-    <p>
-        @{
-            ((CompanyReviewController)this.ViewContext.Controller).GetCompanyReview(ViewBag.CompanyName);
-        }
-    </p>
-</div>
-
-
-@using (Html.BeginForm("PostCompanyReview", "CompanyReview", new { companyName = ViewBag.CompanyName, review = ViewBag.review.value, stars = ViewBag.star.value, username = Globals.getUser() }, FormMethod.Post, new { enctype = "multipart/form-data", onsubmit = "return checkInputs(this)" }))
+@using (Html.BeginForm("GetCompanyReview", "CompanyReview", new { companyName = ViewBag.CompanyName }, FormMethod.Post, null))
 {
     <div style="height:100px">
-        <h4>Leave a review for @ViewBag.CompanyName</h4>
-        <div style="width:400px; float:left">
-            <textarea class="messagetextarea" id="review" placeholder="Enter your review here." rows="3"></textarea>
-        </div>
-        <div style="width:400px; float:left">
-            <textarea class="messagetextarea" id="star" placeholder="Enter the number of stars that you would rate this company here." rows="1"></textarea>
-        </div>
+        <h4>Click the Buttont to Receive Reviews for this Company:</h4>
         <div style="float:left">
             <button class="sendbutton" id="SendMessageButton">Send</button>
         </div>
     </div>
-    <br /><br />
 }
+
+    @using (Html.BeginForm("PostCompanyReview", "CompanyReview", new { companyName = ViewBag.CompanyName, review = ViewBag.review.value, stars = ViewBag.star.value, username = Globals.getUser() }, FormMethod.Post, new { enctype = "multipart/form-data", onsubmit = "return checkInputs(this)" }))
+    {
+        <div style="height:100px">
+            <h4>Leave a review for @ViewBag.CompanyName</h4>
+            <div style="width:400px; float:left">
+                <textarea class="messagetextarea" id="review" placeholder="Enter your review here." rows="3"></textarea>
+            </div>
+            <div style="width:400px; float:left">
+                <textarea class="messagetextarea" id="star" placeholder="Enter the number of stars that you would rate this company here." rows="1"></textarea>
+            </div>
+            <div style="float:left">
+                <button class="sendbutton" id="SendMessageButton">Send</button>
+            </div>
+        </div>
+        <br /><br />
+    }
 
 
 
