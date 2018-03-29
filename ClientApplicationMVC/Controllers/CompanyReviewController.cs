@@ -26,7 +26,7 @@ namespace ClientApplicationMVC.Controllers
 
             if(result.IsSuccessStatusCode)
             {
-
+                
             }
 
             else

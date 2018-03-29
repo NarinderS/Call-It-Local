@@ -11,26 +11,22 @@ $(function () {
  * If successful, the user will be forewarded to their message inbox
  * This function will fail to work until the Chat Service is implemented.
  */
-function validateAndSendMessage() {
+function checkInputs() {
 
-    var userData = $("#textUserMessage").val();
-    if ($.trim(userData) == "") {
-        return;
+    var review = document.getElementById("review").value;
+    var stars = document.getElementById("star").value;
+
+    if (companyname.length == 0 || stars.length == 0) {
+        alert("Please make sure all fields are filled.");
+        return false;
     }
 
-    var recipient = $("#CompanyNameDisplay").text();
-    var timestamp = Math.round((new Date()).getTime() / 1000);
+    var starRegex = /^[1-5]{1}$/;
 
-    $.ajax({
-        method: "POST",
-        url: "/Chat/SendMessage",
-        data: {
-            receiver: recipient,
-            timestamp: timestamp,
-            message: userData
-        },
-        success: function () {
-            window.location = "/Chat/Index";
-        }
-    });
+    if (stars.length != 1 || !starRegex.test(stars)) {
+        alert("Please ensure that the value entered into the 'Star' textbook is an integer between 1 and 5");
+        return false;
+    }
+
+    return true;
 }
