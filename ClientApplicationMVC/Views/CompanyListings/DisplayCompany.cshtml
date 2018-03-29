@@ -19,7 +19,6 @@
 
 <h1>OR</h1>
 
-// TODO: FINISH THIS
 @using (Html.BeginForm("PostCompanyReview", "CompanyReview", new { companyName = ViewBag.CompanyName, review = ViewBag.messagetextarea.value, stars = ViewBag.stararea.value, username = Globals.getUser() }, FormMethod.Post, null))
 <div style="height:100px">
     <h4>Leave a review for @ViewBag.CompanyName</h4>
