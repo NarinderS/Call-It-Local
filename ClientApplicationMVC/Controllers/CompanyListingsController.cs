@@ -38,6 +38,7 @@ namespace ClientApplicationMVC.Controllers
         /// <returns>A view to be sent to the client</returns>
         public ActionResult Search(string textCompanyName)
         {
+            ViewBag.DebugMessage = "Point 1";
 
             if (Globals.isLoggedIn() == false)
             {
@@ -45,12 +46,18 @@ namespace ClientApplicationMVC.Controllers
                 return View("Index");
             }
 
+            ViewBag.DebugMessage = "Point 2";
+
+
             ServiceBusConnection connection = ConnectionManager.getConnectionObject(Globals.getUser());
             if(connection == null)
             {
                 ViewBag.DM = "Connection is null";
                 return View("Index");
             }
+
+            ViewBag.DebugMessage = "Point 3";
+
 
             CompanySearchRequest request = new CompanySearchRequest(textCompanyName);
 
@@ -60,6 +67,8 @@ namespace ClientApplicationMVC.Controllers
                 ViewBag.DM = response.response;
                 return View("Index");
             }
+
+            ViewBag.DebugMessage = "Point 4";
 
 
 
