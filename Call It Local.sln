@@ -13,7 +13,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EchoService", "EchoService\
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CompanyService", "CompanyService\CompanyService.csproj", "{7F382A89-8339-4948-8871-3BB2018C656A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RESTful_Assignment", "..\Milestone 4\RESTful_API\RESTful_Assignment\RESTful_Assignment.csproj", "{85AD7329-128A-4187-AF37-60086AC7C10E}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RESTful_Assignment", "RESTful_API\RESTful_Assignment\RESTful_Assignment.csproj", "{85AD7329-128A-4187-AF37-60086AC7C10E}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
