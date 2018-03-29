@@ -6,16 +6,16 @@
 <script type="text/javascript" src="~/Scripts/CompanyListings/CompanyListingsFunctions.js"></script>
 <h2 id="CompanyNameDisplay">@ViewBag.CompanyName</h2>
 <br />
-<p>Email: @ViewBag.CompanyInfo.email</p>
-<br />
-<p>Phone Number: @ViewBag.CompanyInfo.phoneNumber</p>
+<p><b>Email:</b> @ViewBag.CompanyInfo.email</p>
+<br/>
+<p><b>Phone Number:</b> @ViewBag.CompanyInfo.phoneNumber</p>
 <br />
 <p>@ViewBag.CompanyName can be found at these locations:</p>
 <br />
 @foreach (string location in ViewBag.CompanyInfo.locations)
 {
-    <p style="padding-left:4em;">@location</p>
-    <br />
+<p style="padding-left:4em;"><b>@location</b></p>
+    <br/>
 }
 
 @using (Html.BeginForm("GetCompanyReview", "CompanyReview", new { companyName = ViewBag.CompanyName }, FormMethod.Post, null))
@@ -23,11 +23,10 @@
     <div style="height:100px">
         <h4>Click the Buttont to Receive Reviews for this Company:</h4>
         <div style="float:left">
-            <button class="sendbutton" id="SendMessageButton">Send</button>
+            <input type="submit" value="Send" class="btn btn-default" id="SendMessageButton" />
         </div>
     </div>
 }
-@using (Html.BeginForm("PostCompanyReview", "CompanyReview", new { companyName = ViewBag.CompanyName, review = ViewBag.review.value, stars = ViewBag.star.value, username = Globals.getUser() }, FormMethod.Post, new { enctype = "multipart/form-data", onsubmit = "return checkInputs(this)" }))
 {
         <div style="height:100px">
             <h4>Leave a review for @ViewBag.CompanyName</h4>
