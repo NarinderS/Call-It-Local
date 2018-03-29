@@ -39,7 +39,7 @@ namespace CompanyService.Database
             {
                 string query = "INSERT INTO accounts(username, password, address, phonenumber, email, type)" +
                     "VALUES('" + account.username + "','" + account.password + "','" + account.address + "','" + account.phonenumber + "','" + account.email + "','" + account.type.ToString() + "');";
-
+                System.Diagnostics.Debug.WriteLine(query);
                 MySqlCommand command = new MySqlCommand(query, connection);
                 command.ExecuteNonQuery();
                 closeConnection();
