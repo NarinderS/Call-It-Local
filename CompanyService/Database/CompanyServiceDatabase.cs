@@ -276,7 +276,6 @@ namespace CompanyService.Database
                         new string[]
                         {
                             "NOT NULL",
-                            "UNIQUE"
                         }, false
                     )
                 }
