@@ -41,13 +41,14 @@ namespace ClientApplicationMVC.Controllers
         public ActionResult GetCompanyReview(String companyName) 
         {
             HttpClient client = new HttpClient();
-
+            String request = "{companyName: \"" + companyName + "\"}";
             // TODO: Put actual URI of assignment 4
-            var result = client.GetAsync("http://localhost/api/Reviews/" + companyName);
+            var result = client.GetAsync("35.188.169.187/API/Review/GetReview/" + request);
 
             var body = result.Result;
             var returnValue = body.ToString();
-            return View(returnValue);
+            ViewBag.RESULTS = returnValue;
+            return View("DisplayCompany");
         }
     }
 }

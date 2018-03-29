@@ -40,6 +40,7 @@ namespace CompanyService.Handlers
 
             //Format the company list so it looks like what it is below, With ; dividing the different companies //NARINDER
             string response = CompanyServiceDatabase.companyListToString(temp);
+            
 
 
             Debug.consoleMsg(response);
