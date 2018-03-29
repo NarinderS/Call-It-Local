@@ -39,7 +39,7 @@ namespace CompanyService.Handlers
             CompanyList temp = CompanyServiceDatabase.getInstance().searchCompanies(message.searchDeliminator);
 
             //Format the company list so it looks like what it is below, With ; dividing the different companies //NARINDER
-            string response = "Google;Microsoft;Amazon";
+            string response = CompanyServiceDatabase.companyListToString(temp);
 
 
             Debug.consoleMsg(response);

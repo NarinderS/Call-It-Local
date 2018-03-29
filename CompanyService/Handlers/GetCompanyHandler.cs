@@ -36,7 +36,7 @@ namespace CompanyService.Handlers
             CompanyInstance temp = CompanyServiceDatabase.getInstance().getCompanyInfo(message.companyInfo.companyName);
 
             //Format the company list so it looks like what it is below, With ; dividing the different companies //NARINDER
-            string response = "Google;4031234567;gake@gmail.com;California";
+            string response = CompanyServiceDatabase.companyInstanceToString(temp);
 
 
             //The context is used to give a reply back to the endpoint that sent the request

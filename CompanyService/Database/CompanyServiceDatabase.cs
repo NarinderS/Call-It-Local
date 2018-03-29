@@ -138,7 +138,7 @@ namespace CompanyService.Database
             }
         }
 
-        public string companyInstanceToString(CompanyInstance company)
+        public static string companyInstanceToString(CompanyInstance company)
         {
             string ret = company.companyName + ";" + company.phoneNumber + ";" + company.email + ";";
             foreach (string i in company.locations)
@@ -146,7 +146,7 @@ namespace CompanyService.Database
             return ret.Substring(0, ret.Length-1);
         }
 
-        public string companyListToString(CompanyList companyList)
+        public static string companyListToString(CompanyList companyList)
         {
             if (companyList.companyNames.Length == 0)
                 return "";
