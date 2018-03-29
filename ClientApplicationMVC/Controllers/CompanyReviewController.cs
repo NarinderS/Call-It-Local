@@ -22,7 +22,7 @@ namespace ClientApplicationMVC.Controllers
             var content = new StringContent(json, Encoding.UTF8, "application/json");
 
             // TODO: Put the actual URI for the assignment 4 instance here
-            var result = client.PostAsync("http://localhost/api/Reviews/", content).Result;
+            var result = client.PostAsync("http://35.226.124.97/home/SaveComanyReview/", content).Result;
 
             if(result.IsSuccessStatusCode)
             {
@@ -43,7 +43,7 @@ namespace ClientApplicationMVC.Controllers
             HttpClient client = new HttpClient();
             String request = "{companyName: \"" + companyName + "\"}";
             // TODO: Put actual URI of assignment 4
-            var result = client.GetAsync("35.188.169.187/API/Review/GetReview/" + request);
+            var result = client.GetAsync("http://35.226.124.97/home/GetCompanyReview/" + request);
 
             var body = result.Result;
             var returnValue = body.ToString();
