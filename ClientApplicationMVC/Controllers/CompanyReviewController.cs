@@ -48,7 +48,7 @@ namespace ClientApplicationMVC.Controllers
             var body = result.Result;
             var returnValue = body.ToString();
             ViewBag.RESULTS = returnValue;
-            return View("DisplayCompany");
+            return View();
         }
     }
 }
