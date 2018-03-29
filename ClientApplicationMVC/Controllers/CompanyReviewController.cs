@@ -17,7 +17,7 @@ namespace ClientApplicationMVC.Controllers
         {
             HttpClient client = new HttpClient();
 
-            String json = "{\"companyname\":\"" + companyName + "\",\"review\":\"" + review + "\",\"stars\":\"" + stars + "\",timestamp\":\"" + DateTimeOffset.Now + "\",username\":\"" + username + "\"}";
+            String json = "{\"companyName\":\"" + companyName + "\",\"review\":\"" + review + "\",\"stars\":\"" + stars + "\",timestamp\":\"" + DateTimeOffset.Now + "\",username\":\"" + username + "\"}";
             
             var content = new StringContent(json, Encoding.UTF8, "application/json");
 
