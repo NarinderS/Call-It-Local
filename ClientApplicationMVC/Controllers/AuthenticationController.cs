@@ -41,7 +41,7 @@ namespace ClientApplicationMVC.Controllers
                 response = connection.sendLogIn(request);
             }
 
-            //ViewBag.AsIsResponse = response.response;
+            ViewBag.AsIsResponse = response.response;
 
             if (response.ToString().Equals("Login Successful"))
             {
