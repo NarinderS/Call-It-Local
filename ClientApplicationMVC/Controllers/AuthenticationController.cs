@@ -1,10 +1,8 @@
 ﻿using ClientApplicationMVC.Models;
-
 using Messages.NServiceBus.Commands;
 using Messages.DataTypes;
 using Messages.ServiceBusRequest;
 using Messages.ServiceBusRequest.Authentication.Requests;
-
 using System.Web.Mvc;
 using System.Net;
 
@@ -24,9 +22,9 @@ namespace ClientApplicationMVC.Controllers
             ViewBag.AsIsResponse = "";
             return View();
         }
-		
-		//This class is incomplete and should be completed by the students in milestone 2
-		//Hint: You will need to make use of the ServiceBusConnection class. See EchoController.cs for an example.
+
+        //This class is incomplete and should be completed by the students in milestone 2
+        //Hint: You will need to make use of the ServiceBusConnection class. See EchoController.cs for an example.
 
         public ActionResult Login(LogInRequest login)
         {
@@ -43,12 +41,16 @@ namespace ClientApplicationMVC.Controllers
                 response = connection.sendLogIn(request);
             }
 
-            ViewBag.AsIsResponse = response.response;
-            //Do things with this response (if true then yay if not then nay :(   )
+            //ViewBag.AsIsResponse = response.response;
 
-
-
-            return View("Index");
+            if (response.ToString().Equals("Login Successful"))
+            {
+                return View("~/Home/Index");
+            }
+            else
+            {
+                return View("Index");
+            }
         }
 
         //Opens the page for creating a new account
@@ -73,12 +75,10 @@ namespace ClientApplicationMVC.Controllers
             }
 
             ViewBag.AsIsResponse = response.response;
-            //Do things with this response (if true then yay if not then nay :(   )
 
             if(response.response.Contains("Duplicate")){
                 return View("CreateAccount");
             }
-
 
             return View("Index");
         }
@@ -88,6 +88,5 @@ namespace ClientApplicationMVC.Controllers
             Globals.setUser("Log In");
             return RedirectToAction("Index", "Home");
         }
-
     }
 }

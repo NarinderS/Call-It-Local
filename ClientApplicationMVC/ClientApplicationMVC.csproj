@@ -184,7 +184,6 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
-    <Content Include="Views\Authentication\CreateAccountTEMP.cshtml" />
     <Content Include="Views\Authentication\Index.cshtml" />
     <Content Include="Views\Echo\index.cshtml" />
     <Content Include="Views\Home\Contact.cshtml" />
@@ -214,7 +213,7 @@
     <VisualStudio>
       <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
         <WebProjectProperties>
-          <UseIIS>True</UseIIS>
+          <UseIIS>False</UseIIS>
           <AutoAssignPort>True</AutoAssignPort>
           <DevelopmentServerPort>53407</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>

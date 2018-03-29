@@ -29,7 +29,7 @@ namespace ClientApplicationMVC.Models
             {
                 addConnection(request.username, newConnection);
                 Globals.setUser(request.username);
-                response.response = "Login successfull";
+                response.response = "Login Successful";
             }
             else
             {

@@ -71,7 +71,6 @@ namespace CompanyService
             do
             {
                 entry = Console.ReadLine();
-
                 switch (entry)
                 {
                     case ("DELETEDB"):
@@ -89,7 +88,6 @@ namespace CompanyService
             } while (!entry.Equals(""));
 
             await endpointInstance.Stop().ConfigureAwait(false);
-
         }
     }
 }
