@@ -137,7 +137,28 @@ namespace CompanyService.Database
                 return null;
             }
         }
+
+        public string companyInstanceToString(CompanyInstance company)
+        {
+            string ret = company.companyName + ";" + company.phoneNumber + ";" + company.email + ";";
+            foreach (string i in company.locations)
+                ret += i + ";";
+            return ret.Substring(0, ret.Length-1);
+        }
+
+        public string companyListToString(CompanyList companyList)
+        {
+            if (companyList.companyNames.Length == 0)
+                return "";
+
+            string ret = "";
+            foreach (string i in companyList.companyNames)
+                ret += i + ";";
+            return ret.Substring(0, ret.Length - 1);
+        }
     }
+
+
 
     public partial class CompanyServiceDatabase : AbstractDatabase
     {

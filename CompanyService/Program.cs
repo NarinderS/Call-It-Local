@@ -20,7 +20,7 @@ namespace CompanyService
         /// </summary>
         static void Main(string[] args)
         {
-            AsyncMain().GetAwaiter().GetResult();
+           AsyncMain().GetAwaiter().GetResult();
         }
 
 
