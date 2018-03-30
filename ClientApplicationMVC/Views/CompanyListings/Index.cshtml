@@ -19,17 +19,19 @@
 
 @if (ViewBag.Companylist != null)
 {
-
     if (ViewBag.Companylist.Length == 0)
     {
         <p>Your search did not return any results. Please try again.</p>
     }
     else
     {
-        <p style="font-size:larger">Results:</p> <br />
+        <h2>Results</h2> <br />
         foreach (string item in ViewBag.Companylist)
         {
-            @Html.ActionLink(item, "DisplayCompany/" + item, "CompanyListings")
+            <div class="alert alert-success">
+
+                @Html.ActionLink(item, "DisplayCompany/" + item, "CompanyListings")
+            </div>
             <br />
         }
     }

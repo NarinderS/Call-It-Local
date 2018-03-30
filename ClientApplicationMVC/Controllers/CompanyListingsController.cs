@@ -1,5 +1,4 @@
 ﻿using ClientApplicationMVC.Models;
-
 using Messages.DataTypes.Database.CompanyDirectory;
 using Messages.ServiceBusRequest.CompanyDirectory.Responses;
 using Messages.ServiceBusRequest.CompanyDirectory.Requests;
