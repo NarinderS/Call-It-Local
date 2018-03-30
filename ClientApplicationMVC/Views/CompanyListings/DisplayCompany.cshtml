@@ -6,96 +6,91 @@
 <script type="text/javascript" src="~/Scripts/jquery-1.10.2.min.js"></script>
 <script type="text/javascript" src="~/Scripts/CompanyListings/CompanyListingsFunctions.js"></script>
 <div class="jumbotron text-center">
-
-    <h2 id="CompanyNameDisplay">@ViewBag.CompanyName</h2>
-    <br />
+    <h1 id="CompanyNameDisplay">@ViewBag.CompanyName</h1>
     <p><b>Email:</b> @ViewBag.CompanyInfo.email</p>
-    <br />
     <p><b>Phone Number:</b> @ViewBag.CompanyInfo.phoneNumber</p>
-    <br />
     <p><b>Locations:</b></p>
-    <br />
     @foreach (string location in ViewBag.CompanyInfo.locations)
     {
-        <p style="padding-left:4em;">@location</p>
+        <p>@location</p>
         <br />
     }
-</div> 
+</div>
 
-    <p><b>Reviews:</b></p>
-    <br />
-    <p>@Html.Raw(ViewBag.reviews)</p>
+<p><b>Reviews:</b></p>
+<br />
+<p>@Html.Raw(ViewBag.reviews)</p>
 
-    <h1>@ViewBag.DM2</h1>
-    @if (ViewBag.Companyreviewpost != null)
+<h1>@ViewBag.DM2</h1>
+@if (ViewBag.Companyreviewpost != null)
+{
+
+    if (ViewBag.Companyreviewpost.Length == 0 || ViewBag.Companyreviewpost.Contains("fail"))
     {
-
-        if (ViewBag.Companyreviewpost.Length == 0 || ViewBag.Companyreviewpost.Contains("fail"))
-        {
-            <p>Your review submission was not successful. Please try again.</p>
-        }
-        else
-        {
-            <p style="font-size:larger">Results:</p> <br />
-            <p>ViewBag.Companyreviewpost</p>
-        }
+        <p>Your review submission was not successful. Please try again.</p>
     }
-
-    @using (Html.BeginForm("PostCompanyReview", "CompanyListings"))
+    else
     {
-        @Html.AntiForgeryToken()
+        <p style="font-size:larger">Results:</p> <br />
+        <p>ViewBag.Companyreviewpost</p>
+    }
+}
 
-        <div class="form-horizontal">
-            <h4>PostReview</h4>
-            <hr />
-            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-            <div class="form-group">
-                @Html.LabelFor(model => model.companyName, htmlAttributes: new { @class = "control-label col-md-2" })
-                <div class="col-md-10">
-                    @Html.EditorFor(model => model.companyName, new { htmlAttributes = new { @class = "form-control", @Value = ViewBag.CompanyName, @readonly = true } })
-                    @Html.ValidationMessageFor(model => model.companyName, "", new { @class = "text-danger" })
-                </div>
-            </div>
+@using (Html.BeginForm("PostCompanyReview", "CompanyListings"))
+{
+    @Html.AntiForgeryToken()
 
-            <div class="form-group">
-                @Html.LabelFor(model => model.review, htmlAttributes: new { @class = "control-label col-md-2" })
-                <div class="col-md-10">
-                    @Html.EditorFor(model => model.review, new { htmlAttributes = new { @class = "form-control" } })
-                    @Html.ValidationMessageFor(model => model.review, "", new { @class = "text-danger" })
-                </div>
-            </div>
-
-            <div class="form-group">
-                @Html.LabelFor(model => model.stars, htmlAttributes: new { @class = "control-label col-md-2" })
-                <div class="col-md-10">
-                    @Html.EditorFor(model => model.stars, new { htmlAttributes = new { @class = "form-control" } })
-                    @Html.ValidationMessageFor(model => model.stars, "", new { @class = "text-danger" })
-                </div>
-            </div>
-
-            <div class="form-group">
-                @Html.LabelFor(model => model.timestamp, htmlAttributes: new { @class = "control-label col-md-2" })
-                <div class="col-md-10">
-                    @Html.EditorFor(model => model.timestamp, new { htmlAttributes = new { @class = "form-control", @Value = ViewBag.time, @readonly = true } })
-                    @Html.ValidationMessageFor(model => model.timestamp, "", new { @class = "text-danger" })
-                </div>
-            </div>
-
-            <div class="form-group">
-                @Html.LabelFor(model => model.username, htmlAttributes: new { @class = "control-label col-md-2" })
-                <div class="col-md-10">
-                    @Html.EditorFor(model => model.username, new { htmlAttributes = new { @class = "form-control", @Value = ViewBag.username, @readonly = true } })
-                    @Html.ValidationMessageFor(model => model.username, "", new { @class = "text-danger" })
-                </div>
-            </div>
-
-            <div class="form-group">
-                <div class="col-md-offset-2 col-md-10">
-                    <input type="submit" value="Create" class="btn btn-default" />
-                </div>
+    <div class="form-horizontal">
+        <h4>PostReview</h4>
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <div class="form-group">
+            @Html.LabelFor(model => model.companyName, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.companyName, new { htmlAttributes = new { @class = "form-control", @Value = ViewBag.CompanyName, @readonly = true } })
+                @Html.ValidationMessageFor(model => model.companyName, "", new { @class = "text-danger" })
             </div>
         </div>
-    }
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.review, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.review, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.review, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.stars, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.stars, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.stars, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.timestamp, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.timestamp, new { htmlAttributes = new { @class = "form-control", @Value = ViewBag.time, @readonly = true } })
+                @Html.ValidationMessageFor(model => model.timestamp, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.username, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.username, new { htmlAttributes = new { @class = "form-control", @Value = ViewBag.username, @readonly = true } })
+                @Html.ValidationMessageFor(model => model.username, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Create" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+}
 
 
 
