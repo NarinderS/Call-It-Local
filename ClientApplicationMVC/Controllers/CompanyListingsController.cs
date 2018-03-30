@@ -150,10 +150,10 @@ namespace ClientApplicationMVC.Controllers
                 ViewBag.DM2 = "Post was unsuccessful";
             }
 
-            return View("DisplayCompany");
+            ViewBag.Companyreviewpost = result;
+
+            return View();
         }
-
-
 
         // GET: Company Reviews
         public ActionResult GetCompanyReview()
@@ -161,7 +161,7 @@ namespace ClientApplicationMVC.Controllers
             /*
             Task<String> result = GetResponseString(ViewBag.CompanyName);
 
-            var returnValue = result.Result;
+            Debug.consoleMsg("The value of companyName going into the GET request is: " + ViewBag.CompanyName);
 
             ViewBag.Companyreviews = returnValue;
             */
@@ -207,12 +207,14 @@ namespace ClientApplicationMVC.Controllers
         {
             var client = new HttpClient();
 
-            Debug.consoleMsg("The value of compName is: " + compName);
+            else
 
-            var result = await client.GetAsync("http://35.226.124.97/home/GetCompanyReview/" + compName);
-            var contents = await result.Content.ReadAsStringAsync();
+            {
+                ViewBag.DM1 = "GET Request was unsuccessful";
+                ViewBag.Companyreviews = result;
+            }
 
-            return contents;
+            return View();
         }
     }
 }
