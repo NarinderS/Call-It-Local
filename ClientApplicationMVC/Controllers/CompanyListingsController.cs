@@ -132,25 +132,37 @@ namespace ClientApplicationMVC.Controllers
             string totalReviews = allReviews.Value.ToString();
             string[] unformattedResults = totalReviews.Split(',');
 
-            for (int i = 0; i < unformattedResults.Length; i+=5)
+            for (int i = 0; i < unformattedResults.Length; i += 5)
             {
-                string[] temp = unformattedResults[i+1].Split(':');
+                string[] temp = unformattedResults[i + 1].Split(':');
                 ViewBag.reviews += "Review: ";
-                ViewBag.reviews += temp[1];
+                ViewBag.reviews += temp[1].Substring(1, temp.Length - 1);
+                ViewBag.reviews += "\n";
 
                 temp = unformattedResults[i + 2].Split(':');
                 ViewBag.reviews += "Stars: ";
-                ViewBag.reviews += temp[1];
+                ViewBag.reviews += temp[1].Substring(1, temp.Length - 1);
+                ViewBag.reviews += "\n";
 
                 temp = unformattedResults[i + 3].Split(':');
                 ViewBag.reviews += "Timestamp: ";
-                ViewBag.reviews += temp[1];
+                ViewBag.reviews += temp[1].Substring(1, temp.Length - 1);
+                ViewBag.reviews += "\n";
 
                 temp = unformattedResults[i + 4].Split(':');
                 ViewBag.reviews += "Username: ";
-                ViewBag.reviews += temp[1];
+
+                if ((i + 5) < unformattedResults.Length) { 
+                    ViewBag.reviews += temp[1].Substring(1, temp.Length - 2);
+                }
+                
+                else {
+                    ViewBag.reviews += temp[1].Substring(1, temp.Length - 3);
+                }    
 
                 ViewBag.reviews += "\n";
+
+                ViewBag.reviews += "\n\n";
             }
 
             return View("DisplayCompany");
