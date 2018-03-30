@@ -162,10 +162,19 @@ namespace ClientApplicationMVC.Controllers
 
             ViewBag.DM1 = "GET Request executed, results are below:";
 
-            var body = result.Result;
-            var returnValue = body.ToString();
+            if(result.EnsureSuccessStatusCode())
+            {
+                ViewBag.DM1 = "GET Request was successful";
+                ViewBag.Companyreviews = result.Content.ReadAsStringAsync();
+            }
 
-            ViewBag.Companyreviews = returnValue;
+
+            else
+            {
+                ViewBag.DM1 = "GET Request was unsuccessful";
+                ViewBag.Companyreviews = result.Content.ReadAsStringAsync();
+            }
+            //ViewBag.Companyreviewsp;
 
             //return View("DisplayCompany");
             return View();
