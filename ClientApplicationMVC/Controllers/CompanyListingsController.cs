@@ -156,26 +156,22 @@ namespace ClientApplicationMVC.Controllers
         {
             HttpClient client = new HttpClient();
             // TODO: Put actual URI of assignment 4
-            var returnedTask = client.GetAsync("http://35.226.124.97/home/GetCompanyReview/" + ViewBag.CompanyName);
-
-            var result = returnedTask.Result;
+            var result = client.GetAsync("http://35.226.124.97/home/GetCompanyReview/" + ViewBag.CompanyName).Result;
 
             Debug.consoleMsg("The value of companyName going into the GET request is: " + ViewBag.CompanyName);
 
             ViewBag.DM1 = "GET Request executed, results are below:";
 
-            if(result.IsSuccessStatusCode)
+            if(!result.IsSuccessStatusCode)
             {
-                ViewBag.DM1 = "GET Request was successful";
-                var temp = result.Content;
-                ViewBag.Companyreviews = temp.ToString();
+                ViewBag.DM1 = "GET Request was unsuccessful";
+                ViewBag.Companyreviews = result.Content.ReadAsAsync<string>().Result;
             }
-
 
             else
             {
                 ViewBag.DM1 = "GET Request was unsuccessful";
-                ViewBag.Companyreviews = result.Content.ReadAsStringAsync();
+                ViewBag.Companyreviews = result.Content.ReadAsAsync<string>().Result;
             }
             //ViewBag.Companyreviewsp;
 
