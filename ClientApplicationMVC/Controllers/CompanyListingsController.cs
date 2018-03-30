@@ -121,8 +121,6 @@ namespace ClientApplicationMVC.Controllers
             CompanyInstance value = new CompanyInstance(responseToArray[0], responseToArray[1], responseToArray[2], locations);
 
             ViewBag.CompanyInfo = value;
-            ViewBag.username = Globals.getUser();
-            ViewBag.time = DateTime.Now.ToString();
 
             //Harjee format the string into an array or something, then display it nicely on the view
             string reviews = GetReview(value.companyName);
@@ -170,12 +168,13 @@ namespace ClientApplicationMVC.Controllers
                 else
                 {
                     temp2 = temp[1];
-                    temp2 = temp2.Substring(1, temp2.Length - 3);
+                    temp2 = temp2.Substring(1, temp2.Length - 4);
                     ViewBag.reviews += temp2;
                 }
             }
 
-            ViewBag.reviews += " <br/> <br/>";
+            ViewBag.reviews += " <br/> ";
+            ViewBag.reviews += " <br/> ";
 
             return View("DisplayCompany");
         }
@@ -183,10 +182,11 @@ namespace ClientApplicationMVC.Controllers
 
         // POST: CompanyReview
         [HttpPost]
-        public ActionResult PostCompanyReview(PostReview PostReview)
+        public ActionResult PostCompanyReview(PostReview review)
         {
             //Harjee can you finish this?
-            string result = this.PostReview(PostReview);
+            ViewBag.Companyreviewpost = review.toString();
+            string result = PostReview(review);
             /*
             HttpClient client = new HttpClient();
 
@@ -210,8 +210,8 @@ namespace ClientApplicationMVC.Controllers
             }
             */
 
-            
-            ViewBag.Companyreviewpost = result;
+            //ViewBag.Companyreviewpost = review.toString();
+            //ViewBag.Companyreviewpost = review.companyName;
 
             return View();
         }
