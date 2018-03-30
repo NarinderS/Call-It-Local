@@ -18,7 +18,7 @@
     <br />
 }
 
-@using (Html.BeginForm("GetCompanyReview", "CompanyReview", FormMethod.Post))
+@using (Html.BeginForm("GetCompanyReview", "CompanyListings", FormMethod.Post))
 {
 <div style="height:100px">
     <h4>Click the Button to Receive Reviews for this Company:</h4>
@@ -44,7 +44,7 @@
 }
 
 
-@using (Html.BeginForm("PostCompanyReview", "CompanyReview", FormMethod.Post, new { enctype = "multipart/form-data", onsubmit = "return checkInputs(this)" }))
+@using (Html.BeginForm("PostCompanyReview", "CompanyListings", FormMethod.Post, new { enctype = "multipart/form-data", onsubmit = "return checkInputs(this)" }))
 {
     <div style="height:100px">
         <h4>Leave a review for @ViewBag.CompanyName</h4>

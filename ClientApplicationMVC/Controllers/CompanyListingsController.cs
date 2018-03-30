@@ -3,11 +3,13 @@
 using Messages.DataTypes.Database.CompanyDirectory;
 using Messages.ServiceBusRequest.CompanyDirectory.Responses;
 using Messages.ServiceBusRequest.CompanyDirectory.Requests;
-
-using System;
 using System.Web.Mvc;
+using System.Net.Http;
+using System;
 using System.Web.Routing;
 using Messages.ServiceBusRequest;
+using Messages;
+using System.Text;
 
 namespace ClientApplicationMVC.Controllers
 {
@@ -25,7 +27,7 @@ namespace ClientApplicationMVC.Controllers
             if (Globals.isLoggedIn())
             {
                 ViewBag.Companylist = null;
-                
+
                 return View("Index");
             }
             ViewBag.DebugMessage = "User Is not logged in (global)";
@@ -50,7 +52,7 @@ namespace ClientApplicationMVC.Controllers
 
 
             ServiceBusConnection connection = ConnectionManager.getConnectionObject(Globals.getUser());
-            if(connection == null)
+            if (connection == null)
             {
                 ViewBag.DM = "Connection is null";
                 return View("Index");
@@ -114,6 +116,56 @@ namespace ClientApplicationMVC.Controllers
             CompanyInstance value = new CompanyInstance(responseToArray[0], responseToArray[1], responseToArray[2], locations);
 
             ViewBag.CompanyInfo = value;
+
+            return View("DisplayCompany");
+        }
+
+
+        // POST: CompanyReview
+        [HttpPost]
+        public ActionResult PostCompanyReview()
+        {
+            HttpClient client = new HttpClient();
+
+            String json = "{\"companyName\":\"" + ViewBag.CompanyName + "\",\"review\":\"" + Request["review"] + "\",\"stars\":\"" + Request["star"] + "\",timestamp\":\"" + DateTimeOffset.Now + "\",username\":\"" + Globals.getUser() + "\"}";
+
+            var content = new StringContent(json, Encoding.UTF8, "application/json");
+
+            Debug.consoleMsg("The value of content going into the POST request is: " + content);
+
+            // TODO: Put the actual URI for the assignment 4 instance here
+            var result = client.PostAsync("http://35.226.124.97/home/SaveComanyReview/", content).Result;
+
+            if (result.IsSuccessStatusCode)
+            {
+                ViewBag.DM2 = "Post was successful";
+            }
+
+            else
+            {
+                ViewBag.DM2 = "Post was unsuccessful";
+            }
+
+            ViewBag.Companyreviewpost = result.Content.ToString();
+
+            return View("DisplayCompany");
+        }
+
+        // GET: Company Reviews
+        public ActionResult GetCompanyReview()
+        {
+            HttpClient client = new HttpClient();
+            // TODO: Put actual URI of assignment 4
+            var result = client.GetAsync("http://35.226.124.97/home/GetCompanyReview/" + ViewBag.CompanyName);
+
+            Debug.consoleMsg("The value of companyName going into the GET request is: " + ViewBag.CompanyName);
+
+            ViewBag.DM1 = "GET Request executed, results are below:";
+
+            var body = result.Result;
+            var returnValue = body.ToString();
+
+            ViewBag.Companyreviews = returnValue;
 
             return View("DisplayCompany");
         }
