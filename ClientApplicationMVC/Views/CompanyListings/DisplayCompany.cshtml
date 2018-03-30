@@ -20,10 +20,14 @@
 }
 
 <p>COMPANY REVIEWS</p>
-<br/>
+<br />
 
 <p>@ViewBag.reviews</p>
-
+@foreach (char reviews in ViewBag.reviews)
+{
+    <p style="padding-left:4em;"><b>@reviews</b></p>
+    <br />
+}
 
 
 
