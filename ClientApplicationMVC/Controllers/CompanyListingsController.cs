@@ -10,6 +10,7 @@ using System.Web.Routing;
 using Messages.ServiceBusRequest;
 using Messages;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace ClientApplicationMVC.Controllers
 {
@@ -146,37 +147,33 @@ namespace ClientApplicationMVC.Controllers
                 ViewBag.DM2 = "Post was unsuccessful";
             }
 
-            ViewBag.Companyreviewpost = result.Content.ToString();
-
             return View("DisplayCompany");
         }
+
+
 
         // GET: Company Reviews
         public ActionResult GetCompanyReview()
         {
-            HttpClient client = new HttpClient();
-            // TODO: Put actual URI of assignment 4
-            var result = client.GetAsync("http://35.226.124.97/home/GetCompanyReview/" + ViewBag.CompanyName).Result;
+            Task<String> result = GetResponseString(ViewBag.CompanyName);
 
-            Debug.consoleMsg("The value of companyName going into the GET request is: " + ViewBag.CompanyName);
+            var returnValue = result.Result;
 
-            ViewBag.DM1 = "GET Request executed, results are below:";
-
-            if(!result.IsSuccessStatusCode)
-            {
-                ViewBag.DM1 = "GET Request was unsuccessful";
-                ViewBag.Companyreviews = result.Content.ReadAsAsync<string>().Result;
-            }
-
-            else
-            {
-                ViewBag.DM1 = "GET Request was unsuccessful";
-                ViewBag.Companyreviews = result.Content.ReadAsAsync<string>().Result;
-            }
-            //ViewBag.Companyreviewsp;
-
-            //return View("DisplayCompany");
+            ViewBag.Companyreviews = returnValue;
             return View();
+        }
+
+
+        async Task<string> GetResponseString(string compName)
+        {
+            var client = new HttpClient();
+
+            Debug.consoleMsg("The value of compName is: " + compName);
+
+            var result = await client.GetAsync("http://35.226.124.97/home/GetCompanyReview/" + compName);
+            var contents = await result.Content.ReadAsStringAsync();
+
+            return contents;
         }
     }
 }
