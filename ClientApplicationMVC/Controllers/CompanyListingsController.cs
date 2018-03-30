@@ -121,6 +121,9 @@ namespace ClientApplicationMVC.Controllers
             CompanyInstance value = new CompanyInstance(responseToArray[0], responseToArray[1], responseToArray[2], locations);
 
             ViewBag.CompanyInfo = value;
+            ViewBag.username = Globals.getUser();
+            ViewBag.time = DateTime.Now.ToString();
+
 
             //Harjee format the string into an array or something, then display it nicely on the view
             string reviews = GetReview(value.companyName);
@@ -160,10 +163,10 @@ namespace ClientApplicationMVC.Controllers
                 ViewBag.reviews += "Username: ";
                 ViewBag.reviews += temp[1];
 
-                ViewBag.reviews += " <br/> <br/>";
+                ViewBag.reviews += " <br/> <br/> ";
             }
 
-            ViewBag.reviews += " <br/> <br/> ";
+            ViewBag.reviews += " <br/> ";
 
             return View("DisplayCompany");
         }
