@@ -167,7 +167,8 @@ namespace ClientApplicationMVC.Controllers
             if(result.IsSuccessStatusCode)
             {
                 ViewBag.DM1 = "GET Request was successful";
-                ViewBag.Companyreviews = result.Content.ReadAsStringAsync();
+                var temp = result.Content;
+                ViewBag.Companyreviews = temp.ToString();
             }
 
 
