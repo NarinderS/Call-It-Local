@@ -141,18 +141,21 @@ namespace ClientApplicationMVC.Controllers
                 string temp2 = temp[1];
                 temp2 = temp2.Substring(1, temp2.Length - 1);
                 ViewBag.reviews += temp2;
+                ViewBag.reviews += " <br/> ";
 
                 temp = unformattedResults[i + 2].Split(':');
                 ViewBag.reviews += "Stars: ";
                 temp2 = temp[1];
                 temp2 = temp2.Substring(1, temp2.Length - 1);
                 ViewBag.reviews += temp2;
+                ViewBag.reviews += " <br/> ";
 
                 temp = unformattedResults[i + 3].Split(':');
                 ViewBag.reviews += "Timestamp: ";
                 temp2 = temp[1];
                 temp2 = temp2.Substring(1, temp2.Length - 1);
                 ViewBag.reviews += temp2;
+                ViewBag.reviews += " <br/> ";
 
                 temp = unformattedResults[i + 4].Split(':');
                 ViewBag.reviews += "Username: ";
@@ -171,6 +174,8 @@ namespace ClientApplicationMVC.Controllers
                     ViewBag.reviews += temp2;
                 }
             }
+
+            ViewBag.reviews += " <br/> <br/>";
 
             return View("DisplayCompany");
         }
