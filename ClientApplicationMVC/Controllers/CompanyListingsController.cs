@@ -137,6 +137,12 @@ namespace ClientApplicationMVC.Controllers
             for(int i = 4; i < unformattedResults.Length; i+=5)
             {
                 int position = unformattedResults[i].IndexOf('}');
+
+                if(position < 0)
+                {
+                    position = unformattedResults[i].IndexOf(']');
+                }
+
                 if (position >= 0)
                 {
                     unformattedResults[i] = unformattedResults[i].Substring(0, position);
