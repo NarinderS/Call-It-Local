@@ -167,7 +167,8 @@ namespace ClientApplicationMVC.Controllers
 
             ViewBag.Companyreviews = returnValue;
 
-            return View("DisplayCompany");
+            //return View("DisplayCompany");
+            return View();
         }
     }
 }
