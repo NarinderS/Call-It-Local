@@ -16,14 +16,18 @@ function checkInputs() {
     var review = document.getElementById("review").value;
     var stars = document.getElementById("stars").value;
 
+    var starCount = parseInt(stars);
+
     if (review.length == 0 || stars.length == 0) {
         alert("Please make sure all fields are filled.");
         return false;
     }
 
     var starRegex = /^[1-5]{1}$/;
+    
 
-    if (stars.length != 1 || !starRegex.test(stars)) {
+
+    if (stars.length != 1 || !(starCount > 0 && starCount <= 5)) {
         alert("Please ensure that the value entered into the 'Star' textbook is an integer between 1 and 5");
         return false;
     }
