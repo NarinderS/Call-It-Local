@@ -136,28 +136,28 @@ namespace ClientApplicationMVC.Controllers
             {
                 string[] temp = unformattedResults[i + 1].Split(':');
                 ViewBag.reviews += "Review: ";
-                ViewBag.reviews += temp[1].Substring(1, temp.Length - 1);
+                ViewBag.reviews += temp[1].Substring(1, temp[1].Length - 1);
                 ViewBag.reviews += "\n";
 
                 temp = unformattedResults[i + 2].Split(':');
                 ViewBag.reviews += "Stars: ";
-                ViewBag.reviews += temp[1].Substring(1, temp.Length - 1);
+                ViewBag.reviews += temp[1].Substring(1, temp[1].Length - 1);
                 ViewBag.reviews += "\n";
 
                 temp = unformattedResults[i + 3].Split(':');
                 ViewBag.reviews += "Timestamp: ";
-                ViewBag.reviews += temp[1].Substring(1, temp.Length - 1);
+                ViewBag.reviews += temp[1].Substring(1, temp[1].Length - 1);
                 ViewBag.reviews += "\n";
 
                 temp = unformattedResults[i + 4].Split(':');
                 ViewBag.reviews += "Username: ";
 
                 if ((i + 5) < unformattedResults.Length) { 
-                    ViewBag.reviews += temp[1].Substring(1, temp.Length - 2);
+                    ViewBag.reviews += temp[1].Substring(1, temp[1].Length - 2);
                 }
                 
                 else {
-                    ViewBag.reviews += temp[1].Substring(1, temp.Length - 3);
+                    ViewBag.reviews += temp[1].Substring(1, temp[1].Length - 3);
                 }    
 
                 ViewBag.reviews += "\n";
