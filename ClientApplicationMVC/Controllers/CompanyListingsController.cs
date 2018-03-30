@@ -189,7 +189,7 @@ namespace ClientApplicationMVC.Controllers
             Debug.consoleMsg("The value of content going into the POST request is: " + content);
 
             // TODO: Put the actual URI for the assignment 4 instance here
-            var result = client.PostAsync("http://35.226.124.97/home/SaveComanyReview/", content).Result;
+            var result = client.PostAsync("http:///home/SaveComanyReview/", content).Result;
 
             if (result.IsSuccessStatusCode)
             {
@@ -237,7 +237,7 @@ namespace ClientApplicationMVC.Controllers
         public string GetReview(string companyName)
         {
             HttpClient client = new HttpClient();
-            client.BaseAddress = new Uri("http://35.226.124.97/home/");
+            client.BaseAddress = new Uri("http://35.188.34.108/home/");
             client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
 
 
@@ -255,7 +255,7 @@ namespace ClientApplicationMVC.Controllers
         public string PostReview(PostReview review)
         {
             HttpClient client = new HttpClient();
-            client.BaseAddress = new Uri("http://35.226.124.97/home/");
+            client.BaseAddress = new Uri("http://35.188.34.108/home/");
             client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
 
             string postBody = JsonConvert.SerializeObject(review);
