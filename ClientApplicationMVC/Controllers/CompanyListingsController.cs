@@ -169,24 +169,23 @@ namespace ClientApplicationMVC.Controllers
 
             ViewBag.Companyreviews = returnValue;
             */
+            PostReview review = new PostReview()
+            {
+                companyName = "Google",
+                review = "Please work god",
+                stars = 5,
+                timestamp = "020202",
+                username = "Sadat"
+                
 
-            ViewBag.SADAT = GetReview("Test");
+            };
+            string postBody = JsonConvert.SerializeObject(review);
+            ViewBag.SADAT = PostReview(review);
 
             return View();
         }
         
-
-        static async Task<Review> GetProductAsync(string path)
-        {
-            HttpClient client = new HttpClient();
-            Review product = null;
-            HttpResponseMessage response = await client.GetAsync("http://35.226.124.97/home/GetCompanyReview/Google");
-            if (response.IsSuccessStatusCode)
-            {
-                product = await response.Content.ReadAsAsync<Review>();
-            }
-            return product;
-        }
+        
 
         public string GetReview(string companyName)
         {
@@ -206,15 +205,15 @@ namespace ClientApplicationMVC.Controllers
             //return JsonConvert.DeserializeObject<Review>(json);
         }
 
-        public string PostReview(string jsonReview, string companyName)
+        public string PostReview(PostReview review)
         {
             HttpClient client = new HttpClient();
             client.BaseAddress = new Uri("http://35.226.124.97/home/");
             client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
 
-            string postBody = jsonReview;
+            string postBody = JsonConvert.SerializeObject(review);
             HttpContent content = new StringContent(postBody, Encoding.UTF8, "application/json");
-            HttpResponseMessage response = client.PostAsync("GetCompanyReview/" + companyName, content).Result;
+            HttpResponseMessage response = client.PostAsync("SaveCompanyReview/", content).Result;
 
             // Read the response body as string
             string json = response.Content.ReadAsStringAsync().Result;
@@ -223,6 +222,19 @@ namespace ClientApplicationMVC.Controllers
             // deserialize the JSON response returned from the Web API back to a login_info object
             //return JsonConvert.DeserializeObject<Review>(json);
         }
+
+        /*
+        static async Task<Review> GetProductAsync(string path)
+        {
+            HttpClient client = new HttpClient();
+            Review product = null;
+            HttpResponseMessage response = await client.GetAsync("http://35.226.124.97/home/GetCompanyReview/Google");
+            if (response.IsSuccessStatusCode)
+            {
+                product = await response.Content.ReadAsAsync<Review>();
+            }
+            return product;
+        }*/
 
         /*
         async Task<string> GetResponseString(string compName)
