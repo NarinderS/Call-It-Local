@@ -132,6 +132,12 @@ namespace ClientApplicationMVC.Controllers
             string totalReviews = allReviews.Value.ToString();
             string[] unformattedResults = totalReviews.Split(',');
 
+            for(int i = 4; i < unformattedResults.Length; i+=5)
+            {
+                int position = unformattedResults[i].IndexOf('}');
+                unformattedResults[i] = unformattedResults[i].Substring(0, position);
+            }
+
             for (int i = 0; i < unformattedResults.Length; i+=5)
             {
                 string[] temp = unformattedResults[i+1].Split(':');
@@ -151,10 +157,7 @@ namespace ClientApplicationMVC.Controllers
 
                 temp = unformattedResults[i + 4].Split(':');
                 ViewBag.reviews += "Username: ";
-                     
-                
                 ViewBag.reviews += temp[1];
-                
 
                 ViewBag.reviews += " <br/> ";
             }
