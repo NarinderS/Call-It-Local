@@ -132,36 +132,26 @@ namespace ClientApplicationMVC.Controllers
             string totalReviews = allReviews.Value.ToString();
             string[] unformattedResults = totalReviews.Split(',');
 
-            ViewBag.reviews = "<table><tr>";
-
-            ViewBag.reviews += "<th>Review</th><th>Stars</th><th>TimeStamp/th><th>Username</th>";
-
             for (int i = 0; i < unformattedResults.Length; i+=5)
             {
-                ViewBag.reviews += "<tr><td>";
                 string[] temp = unformattedResults[i+1].Split(':');
+                ViewBag.reviews += "Review: ";
                 ViewBag.reviews += temp[1];
-                ViewBag.reviews += "</td>";
 
                 temp = unformattedResults[i + 2].Split(':');
-                ViewBag.reviews += "<td>";
+                ViewBag.reviews += "Stars: ";
                 ViewBag.reviews += temp[1];
-                ViewBag.reviews += "</td>";
 
                 temp = unformattedResults[i + 3].Split(':');
-                ViewBag.reviews += "<td>";
+                ViewBag.reviews += "Timestamp: ";
                 ViewBag.reviews += temp[1];
-                ViewBag.reviews += "</td>";
 
                 temp = unformattedResults[i + 4].Split(':');
-                ViewBag.reviews += "<td>";
+                ViewBag.reviews += "Username: ";
                 ViewBag.reviews += temp[1];
-                ViewBag.reviews += "</td>";
 
-                ViewBag.reviews += "</tr>";
+                ViewBag.reviews += "\n";
             }
-
-            ViewBag.reviews += "</table>";
 
             return View("DisplayCompany");
         }

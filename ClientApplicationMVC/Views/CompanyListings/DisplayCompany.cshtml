@@ -19,9 +19,9 @@
 }
 
 <p>COMPANY REVIEWS</p>
-<br/><br/>
+<br/>
 
-@ViewBag.reviews
+<p>@ViewBag.reviews</p>
 
 
 @using (Html.BeginForm("PostCompanyReview", "CompanyListings", FormMethod.Post, new { enctype = "multipart/form-data", onsubmit = "return checkInputs(this)" }))
