@@ -28,21 +28,6 @@
 </div>
 }
 
-<h1>@ViewBag.DM1</h1>
-@if (ViewBag.Companyreviews != null)
-{
-
-    if (ViewBag.Companyreviews.Length == 0)
-    {
-        <p>Your request did not return any results. Please try again.</p>
-    }
-    else
-    {
-        <p style="font-size:larger">Results:</p> <br />
-        <p>ViewBag.Companyreviews</p>
-    }
-}
-
 
 @using (Html.BeginForm("PostCompanyReview", "CompanyListings", FormMethod.Post, new { enctype = "multipart/form-data", onsubmit = "return checkInputs(this)" }))
 {
