@@ -166,7 +166,7 @@ namespace ClientApplicationMVC.Controllers
             ViewBag.Companyreviews = returnValue;
             */
 
-            ViewBag.SADAT = GetReview2();
+            ViewBag.SADAT = GetReview("Test");
 
             return View();
         }
@@ -184,15 +184,15 @@ namespace ClientApplicationMVC.Controllers
             return product;
         }
 
-        public string GetReview2()
+        public string GetReview(string companyName)
         {
             HttpClient client = new HttpClient();
             client.BaseAddress = new Uri("http://35.226.124.97/home/");
             client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
 
-            string postBody = "Google";
+
             //HttpContent content = new StringContent(postBody, Encoding.UTF8, "application/json");
-            HttpResponseMessage response = client.GetAsync("GetCompanyReview/Google").Result;
+            HttpResponseMessage response = client.GetAsync("GetCompanyReview/" + companyName).Result;
 
             // Read the response body as string
             string json = response.Content.ReadAsStringAsync().Result;
@@ -202,7 +202,7 @@ namespace ClientApplicationMVC.Controllers
             //return JsonConvert.DeserializeObject<Review>(json);
         }
 
-
+        /*
         async Task<string> GetResponseString(string compName)
         {
             var client = new HttpClient();
@@ -216,5 +216,6 @@ namespace ClientApplicationMVC.Controllers
 
             return View();
         }
+        */
     }
 }
