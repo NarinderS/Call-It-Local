@@ -6,6 +6,7 @@ using System.Web.Mvc;
 using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
+using ClientApplicationMVC.Models;
 
 namespace ClientApplicationMVC.Controllers
 {
@@ -13,11 +14,11 @@ namespace ClientApplicationMVC.Controllers
     {
         // POST: CompanyReview
         [HttpPost]
-        public ActionResult PostCompanyReview(String companyName, String review, String stars, String username)
+        public ActionResult PostCompanyReview()
         {
             HttpClient client = new HttpClient();
 
-            String json = "{\"companyName\":\"" + companyName + "\",\"review\":\"" + review + "\",\"stars\":\"" + stars + "\",timestamp\":\"" + DateTimeOffset.Now + "\",username\":\"" + username + "\"}";
+            String json = "{\"companyName\":\"" + ViewBag.companyName + "\",\"review\":\"" + Request["review"] + "\",\"stars\":\"" + Request["star"] + "\",timestamp\":\"" + DateTimeOffset.Now + "\",username\":\"" + Globals.getUser() + "\"}";
             
             var content = new StringContent(json, Encoding.UTF8, "application/json");
 
@@ -26,29 +27,34 @@ namespace ClientApplicationMVC.Controllers
 
             if(result.IsSuccessStatusCode)
             {
-                
+                ViewBag.DM2 = "Post was successful";
             }
 
             else
             {
-
+                ViewBag.DM2 = "Post was unsuccessful";
             }
 
-            return View();
+            ViewBag.Companyreviewpost = result.Content.ToString();
+
+            return View("DisplayCompany");
         }
 
         // GET: Company Reviews
-        public ActionResult GetCompanyReview(String companyName) 
+        public ActionResult GetCompanyReview() 
         {
             HttpClient client = new HttpClient();
-            String request = "{companyName: \"" + companyName + "\"}";
             // TODO: Put actual URI of assignment 4
-            var result = client.GetAsync("http://35.226.124.97/home/GetCompanyReview/" + request);
+            var result = client.GetAsync("http://35.226.124.97/home/GetCompanyReview/" + ViewBag.companyName);
+
+            ViewBag.DM1 = "GET Request executed, results are below:";
 
             var body = result.Result;
             var returnValue = body.ToString();
-            ViewBag.RESULTS = returnValue;
-            return View();
+
+            ViewBag.Companyreviews = returnValue;
+
+            return View("DisplayCompany");
         }
     }
 }

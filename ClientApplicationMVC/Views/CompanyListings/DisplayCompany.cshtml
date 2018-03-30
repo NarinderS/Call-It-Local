@@ -18,33 +18,61 @@
     <br />
 }
 
-@using (Html.BeginForm("GetCompanyReview", "CompanyReview", new { companyName = ViewBag.CompanyName }, FormMethod.Post, null))
+@using (Html.BeginForm("GetCompanyReview", "CompanyReview")
 {
-    <div style="height:100px">
-        <h4>Click the Button to Receive Reviews for this Company:</h4>
-        <div style="float:left">
-            <input type="submit" value="Get Reviews" class="btn btn-default" id="SendMessageButton" />
-        </div>
+<div style="height:100px">
+    <h4>Click the Button to Receive Reviews for this Company:</h4>
+    <div style="float:left">
+        <input type="submit" value="Get Reviews" class="btn btn-default" id="SendMessageButton" />
     </div>
+</div>
 
-    <h4>REVIEWS</h4>
-    <p>@ViewBag.RESULTS</p>
+<h1>@ViewBag.DM1</h1>
+@if (ViewBag.Companyreviews != null)
+{
+
+    if (ViewBag.Companyreviews.Length == 0)
+    {
+        <p>Your request did not return any results. Please try again.</p>
+    }
+    else
+    {
+        <p style="font-size:larger">Results:</p> <br />
+        <p>ViewBag.Companyreviews</p>
+    }
 }
-@using (Html.BeginForm("PostCompanyReview", "CompanyReview", new { companyName = ViewBag.CompanyName, review = ViewBag.review.value, stars = ViewBag.star.value, username = Globals.getUser() }, FormMethod.Post, new { enctype = "multipart/form-data", onsubmit = "return checkInputs(this)" }))
+
+
+@using (Html.BeginForm("PostCompanyReview", "CompanyReview", FormMethod.Post, new { enctype = "multipart/form-data", onsubmit = "return checkInputs(this)" }))
 {
     <div style="height:100px">
         <h4>Leave a review for @ViewBag.CompanyName</h4>
         <div style="width:400px; float:left">
-            <textarea class="messagetextarea" id="review" placeholder="Enter your review here." rows="3"></textarea>
+            @Html.TextBox("review")
         </div>
         <div style="width:400px; float:left">
-            <textarea class="messagetextarea" id="star" placeholder="Enter the number of stars that you would rate this company here." rows="1"></textarea>
+            @Html.TextBox("star")
         </div>
         <div style="float:left">
-            <button class="sendbutton" id="SendMessageButton">Send</button>
+            <input type="submit" value="Post Review" class="btn btn-default" id="GetReviewButton" />
         </div>
     </div>
     <br /><br />
+}
+
+<h1>@ViewBag.DM2</h1>
+@if (ViewBag.Companyreviewpost != null)
+{
+
+    if (ViewBag.Companyreviewpost.Length == 0 || ViewBag.Companyreviewpost.Contains("fail"))
+    {
+        <p>Your review submission was not successful. Please try again.</p>
+    }
+    else
+    {
+        <p style="font-size:larger">Results:</p> <br />
+        <p>ViewBag.Companyreviewpost</p>
+    }
 }
 
 
