@@ -121,6 +121,10 @@ namespace ClientApplicationMVC.Controllers
 
             ViewBag.CompanyInfo = value;
 
+            //Harjee format the string into an array or something, then display it nicely on the view
+            string reviews = GetReview(value.companyName);
+            
+
             return View("DisplayCompany");
         }
 
@@ -193,6 +197,24 @@ namespace ClientApplicationMVC.Controllers
 
             //HttpContent content = new StringContent(postBody, Encoding.UTF8, "application/json");
             HttpResponseMessage response = client.GetAsync("GetCompanyReview/" + companyName).Result;
+
+            // Read the response body as string
+            string json = response.Content.ReadAsStringAsync().Result;
+            return json;
+
+            // deserialize the JSON response returned from the Web API back to a login_info object
+            //return JsonConvert.DeserializeObject<Review>(json);
+        }
+
+        public string PostReview(string jsonReview, string companyName)
+        {
+            HttpClient client = new HttpClient();
+            client.BaseAddress = new Uri("http://35.226.124.97/home/");
+            client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+
+            string postBody = jsonReview;
+            HttpContent content = new StringContent(postBody, Encoding.UTF8, "application/json");
+            HttpResponseMessage response = client.PostAsync("GetCompanyReview/" + companyName, content).Result;
 
             // Read the response body as string
             string json = response.Content.ReadAsStringAsync().Result;
