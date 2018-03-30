@@ -126,56 +126,59 @@ namespace ClientApplicationMVC.Controllers
 
             //Harjee format the string into an array or something, then display it nicely on the view
             string reviews = GetReview(value.companyName);
-
-            JObject json = JObject.Parse(reviews);
-
-            JProperty allReviews = json.Property("reviews");
-
-            string totalReviews = allReviews.Value.ToString();
-            string[] unformattedResults = totalReviews.Split(',');
-
-            for(int i = 4; i < unformattedResults.Length; i+=5)
+            if (!reviews.Contains(":]"))
             {
-                int position = unformattedResults[i].IndexOf('}');
 
-                if(position < 0)
+                JObject json = JObject.Parse(reviews);
+
+                JProperty allReviews = json.Property("reviews");
+
+                string totalReviews = allReviews.Value.ToString();
+                string[] unformattedResults = totalReviews.Split(',');
+
+                for (int i = 4; i < unformattedResults.Length; i += 5)
                 {
-                    position = unformattedResults[i].IndexOf(']');
-                }
+                    int position = unformattedResults[i].IndexOf('}');
 
-                if (position >= 0)
+                    if (position < 0)
+                    {
+                        position = unformattedResults[i].IndexOf(']');
+                    }
+
+                    if (position >= 0)
+                    {
+                        unformattedResults[i] = unformattedResults[i].Substring(0, position);
+                    }
+                }
+                if (unformattedResults.Length > 2)
                 {
-                    unformattedResults[i] = unformattedResults[i].Substring(0, position);
+                    for (int i = 0; i < unformattedResults.Length; i += 5)
+                    {
+                        int reviewNumber = (i / 5) + 1;
+                        string[] temp = unformattedResults[i + 1].Split(':');
+                        ViewBag.reviews += "Review #" + reviewNumber + ": ";
+                        ViewBag.reviews += temp[1];
+                        ViewBag.reviews += " <br/> ";
+
+                        temp = unformattedResults[i + 2].Split(':');
+                        ViewBag.reviews += "Stars: ";
+                        ViewBag.reviews += temp[1];
+                        ViewBag.reviews += " <br/> ";
+
+                        temp = unformattedResults[i + 3].Split(':');
+                        ViewBag.reviews += "Timestamp: ";
+                        ViewBag.reviews += temp[1];
+                        ViewBag.reviews += " <br/> ";
+
+                        temp = unformattedResults[i + 4].Split(':');
+                        ViewBag.reviews += "Username: ";
+                        ViewBag.reviews += temp[1];
+
+                        ViewBag.reviews += " <br/> <br/> ";
+                    }
+
+                    ViewBag.reviews += " <br/> ";
                 }
-            }
-            if (unformattedResults.Length > 2)
-            {
-                for (int i = 0; i < unformattedResults.Length; i += 5)
-                {
-                    int reviewNumber = (i / 5) + 1;
-                    string[] temp = unformattedResults[i + 1].Split(':');
-                    ViewBag.reviews += "Review #" + reviewNumber + ": ";
-                    ViewBag.reviews += temp[1];
-                    ViewBag.reviews += " <br/> ";
-
-                    temp = unformattedResults[i + 2].Split(':');
-                    ViewBag.reviews += "Stars: ";
-                    ViewBag.reviews += temp[1];
-                    ViewBag.reviews += " <br/> ";
-
-                    temp = unformattedResults[i + 3].Split(':');
-                    ViewBag.reviews += "Timestamp: ";
-                    ViewBag.reviews += temp[1];
-                    ViewBag.reviews += " <br/> ";
-
-                    temp = unformattedResults[i + 4].Split(':');
-                    ViewBag.reviews += "Username: ";
-                    ViewBag.reviews += temp[1];
-
-                    ViewBag.reviews += " <br/> <br/> ";
-                }
-
-                ViewBag.reviews += " <br/> ";
             }
 
             else
