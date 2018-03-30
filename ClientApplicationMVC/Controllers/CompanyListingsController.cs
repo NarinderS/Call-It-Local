@@ -181,16 +181,10 @@ namespace ClientApplicationMVC.Controllers
             return View();
         }
 
-        // GET: Company Reviews
+        //TEST FUNCTION USED BY SADAT
         public ActionResult GetCompanyReview()
         {
-            /*
-            Task<String> result = GetResponseString(ViewBag.CompanyName);
 
-            Debug.consoleMsg("The value of companyName going into the GET request is: " + ViewBag.CompanyName);
-
-            ViewBag.Companyreviews = returnValue;
-            */
             PostReview review = new PostReview()
             {
                 companyName = "Google",
