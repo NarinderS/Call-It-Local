@@ -18,7 +18,7 @@
     <br />
 }
 
-@using (Html.BeginForm("GetCompanyReview", "CompanyReview"))
+@using (Html.BeginForm("GetCompanyReview", "CompanyReview", FormMethod.Post))
 {
 <div style="height:100px">
     <h4>Click the Button to Receive Reviews for this Company:</h4>
@@ -54,7 +54,7 @@
             @Html.TextBox("star")
         </div>
         <div style="float:left">
-            <input type="submit" value="Post Review" class="btn btn-default" id="GetReviewButton" />
+            <input type="submit" value="Post Review" class="btn btn-default" id="PostReviewButton" />
         </div>
     </div>
     <br /><br />
