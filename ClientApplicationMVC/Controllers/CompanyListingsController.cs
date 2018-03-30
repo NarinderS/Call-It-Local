@@ -14,6 +14,7 @@ using System.Threading.Tasks;
 using WebApplication1.Models;
 using System.Net.Http.Headers;
 using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 
 namespace ClientApplicationMVC.Controllers
 {
@@ -123,7 +124,13 @@ namespace ClientApplicationMVC.Controllers
 
             //Harjee format the string into an array or something, then display it nicely on the view
             string reviews = GetReview(value.companyName);
-            
+
+            JObject json = JObject.Parse(reviews);
+
+            JProperty allReviews = json.Property("reviews");
+
+            @ViewBag.reviews = allReviews.Value.ToString();
+
 
             return View("DisplayCompany");
         }

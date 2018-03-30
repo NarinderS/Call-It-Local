@@ -18,15 +18,10 @@
     <br />
 }
 
-@using (Html.BeginForm("GetCompanyReview", "CompanyListings", FormMethod.Post))
-{
-<div style="height:100px">
-    <h4>Click the Button to Receive Reviews for this Company:</h4>
-    <div style="float:left">
-        <input type="submit" value="Get Reviews" class="btn btn-default" id="SendMessageButton" />
-    </div>
-</div>
-}
+<p>
+    COMPANY REVIEWS
+    @ViewBag.reviews
+</p>
 
 
 @using (Html.BeginForm("PostCompanyReview", "CompanyListings", FormMethod.Post, new { enctype = "multipart/form-data", onsubmit = "return checkInputs(this)" }))
