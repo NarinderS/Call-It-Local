@@ -174,11 +174,11 @@ namespace ClientApplicationMVC.Controllers
 
         // POST: CompanyReview
         [HttpPost]
-        public ActionResult PostCompanyReview(PostReview review)
+        public ActionResult PostCompanyReview(PostReview PostReview)
         {
             //Harjee can you finish this?
-            ViewBag.Companyreviewpost = review.toString();
-            string result = PostReview(review);
+            ViewBag.Companyreviewpost = PostReview.toString();
+            string result = this.PostReview(PostReview);
             /*
             HttpClient client = new HttpClient();
 
