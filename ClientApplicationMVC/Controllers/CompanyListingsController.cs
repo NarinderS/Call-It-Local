@@ -140,8 +140,9 @@ namespace ClientApplicationMVC.Controllers
 
             for (int i = 0; i < unformattedResults.Length; i+=5)
             {
+                int reviewNumber = (i / 5) + 1;
                 string[] temp = unformattedResults[i+1].Split(':');
-                ViewBag.reviews += "Review: ";
+                ViewBag.reviews += "Review #" + reviewNumber + ": ";
                 ViewBag.reviews += temp[1];
                 ViewBag.reviews += " <br/> ";
 
@@ -159,11 +160,10 @@ namespace ClientApplicationMVC.Controllers
                 ViewBag.reviews += "Username: ";
                 ViewBag.reviews += temp[1];
 
-                ViewBag.reviews += " <br/> ";
+                ViewBag.reviews += " <br/> <br/>";
             }
 
             ViewBag.reviews += " <br/> <br/> ";
-            ViewBag.reviews += " <br/> ";
 
             return View("DisplayCompany");
         }
