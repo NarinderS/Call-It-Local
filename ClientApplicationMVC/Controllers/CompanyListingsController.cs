@@ -10,7 +10,6 @@ using System.Web.Routing;
 using Messages.ServiceBusRequest;
 using Messages;
 using System.Text;
-using System.Threading.Tasks;
 
 namespace ClientApplicationMVC.Controllers
 {
@@ -147,33 +146,37 @@ namespace ClientApplicationMVC.Controllers
                 ViewBag.DM2 = "Post was unsuccessful";
             }
 
-            return View("DisplayCompany");
+            ViewBag.Companyreviewpost = result;
+
+            return View();
         }
-
-
 
         // GET: Company Reviews
         public ActionResult GetCompanyReview()
         {
-            Task<String> result = GetResponseString(ViewBag.CompanyName);
+            HttpClient client = new HttpClient();
+            // TODO: Put actual URI of assignment 4
+            var result = client.GetAsync("http://35.226.124.97/home/GetCompanyReview/" + ViewBag.CompanyName).Result;
 
-            var returnValue = result.Result;
+            Debug.consoleMsg("The value of companyName going into the GET request is: " + ViewBag.CompanyName);
 
-            ViewBag.Companyreviews = returnValue;
+            ViewBag.DM1 = "GET Request executed, results are below:";
+
+            if(result.HasStatusSuccessCode)
+            {
+
+                ViewBag.DM1 = "GET Request was successful";
+                ViewBag.Companyreviews = result;
+            }
+
+            else
+
+            {
+                ViewBag.DM1 = "GET Request was unsuccessful";
+                ViewBag.Companyreviews = result;
+            }
+
             return View();
-        }
-
-
-        async Task<string> GetResponseString(string compName)
-        {
-            var client = new HttpClient();
-
-            Debug.consoleMsg("The value of compName is: " + compName);
-
-            var result = await client.GetAsync("http://35.226.124.97/home/GetCompanyReview/" + compName);
-            var contents = await result.Content.ReadAsStringAsync();
-
-            return contents;
         }
     }
 }
