@@ -19,7 +19,7 @@ namespace ClientApplicationMVC.Controllers
         {
             HttpClient client = new HttpClient();
 
-            String json = "{\"companyName\":\"" + ViewBag.companyName + "\",\"review\":\"" + Request["review"] + "\",\"stars\":\"" + Request["star"] + "\",timestamp\":\"" + DateTimeOffset.Now + "\",username\":\"" + Globals.getUser() + "\"}";
+            String json = "{\"companyName\":\"" + ViewBag.CompanyName + "\",\"review\":\"" + Request["review"] + "\",\"stars\":\"" + Request["star"] + "\",timestamp\":\"" + DateTimeOffset.Now + "\",username\":\"" + Globals.getUser() + "\"}";
             
             var content = new StringContent(json, Encoding.UTF8, "application/json");
 
@@ -48,9 +48,9 @@ namespace ClientApplicationMVC.Controllers
         {
             HttpClient client = new HttpClient();
             // TODO: Put actual URI of assignment 4
-            var result = client.GetAsync("http://35.226.124.97/home/GetCompanyReview/" + ViewBag.companyName);
+            var result = client.GetAsync("http://35.226.124.97/home/GetCompanyReview/" + ViewBag.CompanyName);
 
-            Debug.consoleMsg("The value of companyName going into the GET request is: " + ViewBag.companyName);
+            Debug.consoleMsg("The value of companyName going into the GET request is: " + ViewBag.CompanyName);
 
             ViewBag.DM1 = "GET Request executed, results are below:";
 
