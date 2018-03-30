@@ -137,17 +137,17 @@ namespace ClientApplicationMVC.Controllers
                 string[] temp = unformattedResults[i + 1].Split(':');
                 ViewBag.reviews += "Review: ";
                 ViewBag.reviews += temp[1].Substring(1, temp[1].Length - 1);
-                ViewBag.reviews += "\n";
+                ViewBag.reviews += " <br/> ";
 
                 temp = unformattedResults[i + 2].Split(':');
                 ViewBag.reviews += "Stars: ";
                 ViewBag.reviews += temp[1].Substring(1, temp[1].Length - 1);
-                ViewBag.reviews += "\n";
+                ViewBag.reviews += " <br/> ";
 
                 temp = unformattedResults[i + 3].Split(':');
                 ViewBag.reviews += "Timestamp: ";
                 ViewBag.reviews += temp[1].Substring(1, temp[1].Length - 1);
-                ViewBag.reviews += "\n";
+                ViewBag.reviews += " <br/> ";
 
                 temp = unformattedResults[i + 4].Split(':');
                 ViewBag.reviews += "Username: ";
@@ -160,9 +160,9 @@ namespace ClientApplicationMVC.Controllers
                     ViewBag.reviews += temp[1].Substring(1, temp[1].Length - 3);
                 }    
 
-                ViewBag.reviews += "\n";
+                ViewBag.reviews += " <br/> ";
 
-                ViewBag.reviews += "\n\n";
+                ViewBag.reviews += " <br/>  <br/> ";
             }
 
             return View("DisplayCompany");
