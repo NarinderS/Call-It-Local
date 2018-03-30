@@ -11,17 +11,16 @@
 <br />
 <p><b>Phone Number:</b> @ViewBag.CompanyInfo.phoneNumber</p>
 <br />
-<p>@ViewBag.CompanyName can be found at these locations:</p>
+<p><b>Locations:</b></p>
 <br />
 @foreach (string location in ViewBag.CompanyInfo.locations)
 {
-    <p style="padding-left:4em;"><b>@location</b></p>
+    <p style="padding-left:4em;">@location</p>
     <br />
 }
 
-<p>COMPANY REVIEWS</p>
-<br />
-
+<p><b>Reviews:</b></p>
+<br/>
 <p>@Html.Raw(ViewBag.reviews)</p>
 
 <h1>@ViewBag.DM2</h1>
