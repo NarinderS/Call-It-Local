@@ -36,7 +36,7 @@
     }
 }
 
-@using (Html.BeginForm("PostCompanyReview", "CompanyListings"))
+@using (Html.BeginForm("PostCompanyReview", "CompanyListings", FormMethod.Post, new { enctype = "multipart/form-data", onsubmit = "return checkInputs(this)" }))
 {
     @Html.AntiForgeryToken()
 

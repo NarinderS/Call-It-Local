@@ -14,7 +14,7 @@ $(function () {
 function checkInputs() {
 
     var review = document.getElementById("review").value;
-    var stars = document.getElementById("star").value;
+    var stars = document.getElementById("stars").value;
 
     if (companyname.length == 0 || stars.length == 0) {
         alert("Please make sure all fields are filled.");
