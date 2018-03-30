@@ -11,6 +11,9 @@ using Messages.ServiceBusRequest;
 using Messages;
 using System.Text;
 using System.Threading.Tasks;
+using WebApplication1.Models;
+using System.Net.Http.Headers;
+using Newtonsoft.Json;
 
 namespace ClientApplicationMVC.Controllers
 {
@@ -155,12 +158,48 @@ namespace ClientApplicationMVC.Controllers
         // GET: Company Reviews
         public ActionResult GetCompanyReview()
         {
+            /*
             Task<String> result = GetResponseString(ViewBag.CompanyName);
 
             var returnValue = result.Result;
 
             ViewBag.Companyreviews = returnValue;
+            */
+
+            ViewBag.SADAT = GetReview2();
+
             return View();
+        }
+        
+
+        static async Task<Review> GetProductAsync(string path)
+        {
+            HttpClient client = new HttpClient();
+            Review product = null;
+            HttpResponseMessage response = await client.GetAsync("http://35.226.124.97/home/GetCompanyReview/Google");
+            if (response.IsSuccessStatusCode)
+            {
+                product = await response.Content.ReadAsAsync<Review>();
+            }
+            return product;
+        }
+
+        public string GetReview2()
+        {
+            HttpClient client = new HttpClient();
+            client.BaseAddress = new Uri("http://35.226.124.97/home/");
+            client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+
+            string postBody = "Google";
+            //HttpContent content = new StringContent(postBody, Encoding.UTF8, "application/json");
+            HttpResponseMessage response = client.GetAsync("GetCompanyReview/Google").Result;
+
+            // Read the response body as string
+            string json = response.Content.ReadAsStringAsync().Result;
+            return json;
+
+            // deserialize the JSON response returned from the Web API back to a login_info object
+            //return JsonConvert.DeserializeObject<Review>(json);
         }
 
 
