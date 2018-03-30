@@ -12,5 +12,11 @@ namespace ClientApplicationMVC.Models
         public int stars { get; set; }
         public string timestamp { get; set; }
         public string username { get; set; }
+
+
+        public string toString()
+        {
+            return "companyName " + companyName + "review " + review + "stars " + stars + "timestamp " + timestamp + "username " + username;
+        }
     }
 }

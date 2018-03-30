@@ -132,10 +132,11 @@ namespace ClientApplicationMVC.Controllers
             string totalReviews = allReviews.Value.ToString();
             string[] unformattedResults = totalReviews.Split(',');
 
-            for (int i = 0; i < unformattedResults.Length; i += 5)
+            for (int i = 0; i < unformattedResults.Length; i+=5)
             {
-                string[] temp = unformattedResults[i + 1].Split(':');
+                string[] temp = unformattedResults[i+1].Split(':');
                 ViewBag.reviews += "Review: ";
+<<<<<<< Updated upstream
                 ViewBag.reviews += temp[1].Substring(1, temp[1].Length - 1);
                 ViewBag.reviews += " <br/> ";
 
@@ -148,21 +149,29 @@ namespace ClientApplicationMVC.Controllers
                 ViewBag.reviews += "Timestamp: ";
                 ViewBag.reviews += temp[1].Substring(1, temp[1].Length - 1);
                 ViewBag.reviews += " <br/> ";
+=======
+                ViewBag.reviews += temp[1];
+
+                temp = unformattedResults[i + 2].Split(':');
+                ViewBag.reviews += "Stars: ";
+                ViewBag.reviews += temp[1];
+
+                temp = unformattedResults[i + 3].Split(':');
+                ViewBag.reviews += "Timestamp: ";
+                ViewBag.reviews += temp[1];
+>>>>>>> Stashed changes
 
                 temp = unformattedResults[i + 4].Split(':');
                 ViewBag.reviews += "Username: ";
+                ViewBag.reviews += temp[1];
 
-                if ((i + 5) < unformattedResults.Length) { 
-                    ViewBag.reviews += temp[1].Substring(1, temp[1].Length - 2);
-                }
-                
-                else {
-                    ViewBag.reviews += temp[1].Substring(1, temp[1].Length - 3);
-                }    
-
+<<<<<<< Updated upstream
                 ViewBag.reviews += " <br/> ";
 
                 ViewBag.reviews += " <br/>  <br/> ";
+=======
+                ViewBag.reviews += "\n";
+>>>>>>> Stashed changes
             }
 
             return View("DisplayCompany");
@@ -171,19 +180,10 @@ namespace ClientApplicationMVC.Controllers
 
         // POST: CompanyReview
         [HttpPost]
-        public ActionResult PostCompanyReview()
+        public ActionResult PostCompanyReview(PostReview review)
         {
             //Harjee can you finish this?
-            PostReview review = new PostReview()
-            {
-                companyName = ViewBag.CompanyName,
-                review = Request["review"],
-                stars = 5,
-                timestamp = "020202",
-                username = Globals.getUser()
-
-
-            };
+            ViewBag.Companyreviewpost = review.toString();
             string result = PostReview(review);
             /*
             HttpClient client = new HttpClient();
@@ -208,7 +208,7 @@ namespace ClientApplicationMVC.Controllers
             }
             */
 
-            ViewBag.Companyreviewpost = result;
+            //ViewBag.Companyreviewpost = review.toString();
             //ViewBag.Companyreviewpost = review.companyName;
 
             return View();
@@ -230,6 +230,11 @@ namespace ClientApplicationMVC.Controllers
             };
             ViewBag.SADAT = PostReview(review);
 
+            return View();
+        }
+
+        public ActionResult CreateReview()
+        {
             return View();
         }
         

@@ -1,4 +1,5 @@
-﻿@using ClientApplicationMVC.Models;
+﻿@model ClientApplicationMVC.Models.PostReview
+@using ClientApplicationMVC.Models;
 @using ClientApplicationMVC.Controllers;
 
 <link href="~/Content/ChatStyles.css" rel="stylesheet" type="text/css" />
@@ -24,22 +25,7 @@
 <p>@ViewBag.reviews</p>
 
 
-@using (Html.BeginForm("PostCompanyReview", "CompanyListings", FormMethod.Post, new { enctype = "multipart/form-data", onsubmit = "return checkInputs(this)" }))
-{
-    <div style="height:100px">
-        <h4>Leave a review for @ViewBag.CompanyName</h4>
-        <div style="width:400px; float:left">
-            @Html.TextBox("review")
-        </div>
-        <div style="width:400px; float:left">
-            @Html.TextBox("star")
-        </div>
-        <div style="float:left">
-            <input type="submit" value="Post Review" class="btn btn-default" id="PostReviewButton" />
-        </div>
-    </div>
-    <br /><br />
-}
+
 
 <h1>@ViewBag.DM2</h1>
 @if (ViewBag.Companyreviewpost != null)
@@ -54,6 +40,62 @@
         <p style="font-size:larger">Results:</p> <br />
         <p>ViewBag.Companyreviewpost</p>
     }
+}
+
+@using (Html.BeginForm("PostCompanyReview", "CompanyListings"))
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        <h4>PostReview</h4>
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <div class="form-group">
+            @Html.LabelFor(model => model.companyName, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.companyName, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.companyName, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.review, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.review, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.review, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.stars, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.stars, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.stars, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.timestamp, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.timestamp, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.timestamp, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.username, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.username, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.username, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Create" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
 }
 
 
