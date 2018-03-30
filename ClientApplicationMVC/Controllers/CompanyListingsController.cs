@@ -136,38 +136,38 @@ namespace ClientApplicationMVC.Controllers
             {
                 string[] temp = unformattedResults[i+1].Split(':');
                 ViewBag.reviews += "Review: ";
-                string temp2 = temp[1].Substring(1, temp[1].Length - 1);
+                string temp2 = temp[1];
+                temp2 = temp2.Substring(1, temp2.Length - 1);
                 ViewBag.reviews += temp2;
-                ViewBag.reviews += " <br/> ";
 
                 temp = unformattedResults[i + 2].Split(':');
                 ViewBag.reviews += "Stars: ";
-                temp2 = temp[1].Substring(1, temp[1].Length - 1);
+                temp2 = temp[1];
+                temp2 = temp2.Substring(1, temp2.Length - 1);
                 ViewBag.reviews += temp2;
-                ViewBag.reviews += " <br/> ";
 
                 temp = unformattedResults[i + 3].Split(':');
                 ViewBag.reviews += "Timestamp: ";
-                temp2 = temp[1].Substring(1, temp[1].Length - 1);
+                temp2 = temp[1];
+                temp2 = temp2.Substring(1, temp2.Length - 1);
                 ViewBag.reviews += temp2;
-                ViewBag.reviews += " <br/> ";
 
                 temp = unformattedResults[i + 4].Split(':');
                 ViewBag.reviews += "Username: ";
                      
                 if((i+5) < unformattedResults.Length)
                 {
-                    temp2 = temp[1].Substring(1, temp[1].Length - 1);
+                    temp2 = temp[1];
+                    temp2 = temp2.Substring(1, temp2.Length - 2);
                     ViewBag.reviews += temp2;
                 }
 
                 else
                 {
-                    temp2 = temp[1].Substring(1, temp[1].Length - 1);
+                    temp2 = temp[1];
+                    temp2 = temp2.Substring(1, temp2.Length - 3);
                     ViewBag.reviews += temp2;
                 }
-
-                ViewBag.reviews += " <br/>  <br/> ";
             }
 
             return View("DisplayCompany");
