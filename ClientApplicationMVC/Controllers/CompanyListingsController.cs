@@ -162,7 +162,7 @@ namespace ClientApplicationMVC.Controllers
 
             ViewBag.DM1 = "GET Request executed, results are below:";
 
-            if(result.HasStatusSuccessCode)
+            if(result.IsSuccessStatusCode)
             {
 
                 ViewBag.DM1 = "GET Request was successful";
