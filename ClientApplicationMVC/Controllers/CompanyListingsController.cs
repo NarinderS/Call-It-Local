@@ -156,7 +156,9 @@ namespace ClientApplicationMVC.Controllers
         {
             HttpClient client = new HttpClient();
             // TODO: Put actual URI of assignment 4
-            var result = client.GetAsync("http://35.226.124.97/home/GetCompanyReview/" + ViewBag.CompanyName);
+            var returnedTask = client.GetAsync("http://35.226.124.97/home/GetCompanyReview/" + ViewBag.CompanyName);
+
+            var result = returnedTask.Result;
 
             Debug.consoleMsg("The value of companyName going into the GET request is: " + ViewBag.CompanyName);
 
