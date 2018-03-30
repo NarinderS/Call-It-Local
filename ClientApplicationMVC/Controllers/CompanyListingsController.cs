@@ -140,6 +140,19 @@ namespace ClientApplicationMVC.Controllers
         [HttpPost]
         public ActionResult PostCompanyReview()
         {
+            //Harjee can you finish this?
+            PostReview review = new PostReview()
+            {
+                companyName = ViewBag.CompanyName,
+                review = Request["review"],
+                stars = 5,
+                timestamp = "020202",
+                username = Globals.getUser()
+
+
+            };
+            string result = PostReview(review);
+            /*
             HttpClient client = new HttpClient();
 
             String json = "{\"companyName\":\"" + ViewBag.CompanyName + "\",\"review\":\"" + Request["review"] + "\",\"stars\":\"" + Request["star"] + "\",timestamp\":\"" + DateTimeOffset.Now + "\",username\":\"" + Globals.getUser() + "\"}";
@@ -160,8 +173,10 @@ namespace ClientApplicationMVC.Controllers
             {
                 ViewBag.DM2 = "Post was unsuccessful";
             }
+            */
 
             ViewBag.Companyreviewpost = result;
+            //ViewBag.Companyreviewpost = review.companyName;
 
             return View();
         }
@@ -186,7 +201,6 @@ namespace ClientApplicationMVC.Controllers
                 
 
             };
-            string postBody = JsonConvert.SerializeObject(review);
             ViewBag.SADAT = PostReview(review);
 
             return View();
