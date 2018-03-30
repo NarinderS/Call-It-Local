@@ -28,8 +28,10 @@ namespace CompanyService.Database
         {
             if (instance == null)
             {
+                Debug.consoleMsg("Got to getInstance()");
                 instance = new CompanyServiceDatabase();
             }
+            Debug.consoleMsg("instance is null");
             return instance;
         }
 
@@ -49,7 +51,8 @@ namespace CompanyService.Database
 
                     MySqlCommand command = new MySqlCommand(query, connection);
                     command.ExecuteNonQuery();
-                
+                closeConnection();
+
             } else
             {
                 Debug.consoleMsg("Unable to connect to database");
@@ -117,8 +120,10 @@ namespace CompanyService.Database
         // CompanyList.companyNames will be empty if could not find any company
         public CompanyList searchCompanies(string searchString)
         {
+            Debug.consoleMsg("Got to Point 0");
             if (openConnection() == true)
             {
+                Debug.consoleMsg("Got to Point 1");
                 string query = "SELECT * FROM " + dbname + ".companies" + " WHERE companyName LIKE '%" + searchString + "%';";
 
                 MySqlCommand command = new MySqlCommand(query, connection);
