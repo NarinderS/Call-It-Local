@@ -160,10 +160,10 @@ namespace ClientApplicationMVC.Controllers
                 ViewBag.reviews += "Username: ";
                 ViewBag.reviews += temp[1];
 
-                ViewBag.reviews += " <br/> <br/>";
+                ViewBag.reviews += " <br/> <br/> ";
             }
 
-            ViewBag.reviews += " <br/> <br/> ";
+            ViewBag.reviews += " <br/> ";
 
             return View("DisplayCompany");
         }
