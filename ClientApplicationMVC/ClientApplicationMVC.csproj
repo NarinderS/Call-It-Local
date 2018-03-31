@@ -182,6 +182,7 @@
     <Content Include="Views\CompanyListings\DisplayCompany.cshtml" />
     <Content Include="Views\CompanyListings\Index.cshtml" />
     <Content Include="Views\CompanyListings\GetCompanyReview.cshtml" />
+    <Content Include="Views\CompanyListings\PostCompanyReview.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
