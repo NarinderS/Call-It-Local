@@ -13,6 +13,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EchoService", "EchoService\
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CompanyService", "CompanyService\CompanyService.csproj", "{7F382A89-8339-4948-8871-3BB2018C656A}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ChatService", "ChatService\ChatService.csproj", "{A7B767B0-9073-4489-B7A6-8181A689C51D}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -39,6 +41,10 @@ Global
 		{7F382A89-8339-4948-8871-3BB2018C656A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7F382A89-8339-4948-8871-3BB2018C656A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7F382A89-8339-4948-8871-3BB2018C656A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A7B767B0-9073-4489-B7A6-8181A689C51D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A7B767B0-9073-4489-B7A6-8181A689C51D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A7B767B0-9073-4489-B7A6-8181A689C51D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A7B767B0-9073-4489-B7A6-8181A689C51D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

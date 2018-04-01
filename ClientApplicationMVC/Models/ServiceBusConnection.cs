@@ -14,6 +14,9 @@ using System.Text;
 using System.Threading;
 using Messages.ServiceBusRequest.CompanyDirectory.Requests;
 using Messages.ServiceBusRequest.CompanyDirectory.Responses;
+using Messages.ServiceBusRequest.Chat.Requests;
+using Messages.ServiceBusRequest.Chat.Responses;
+using Messages.DataTypes.Database.Chat;
 
 namespace ClientApplicationMVC.Models
 {
@@ -75,6 +78,33 @@ namespace ClientApplicationMVC.Models
         }
         #endregion CompanyMessages
 
+        //Mileston 5 starts here boyz
+        #region ChatServiceMessages
+
+
+        public ServiceBusResponse getAllChatContacts(GetChatContactsRequest request)
+        {
+            send(request);
+            return readUntilEOF();
+        }
+
+        public ServiceBusResponse getChatHistory(GetChatHistoryRequest request)
+        {
+            send(request);
+            return readUntilEOF();
+        }
+
+        public ServiceBusResponse sendChatMessage(SendMessageRequest request)
+        {
+            send(request);
+            return readUntilEOF();
+        }
+
+        
+
+
+        #endregion ChatServiceMessages
+
 
         #region EchoServiceMessages
 
@@ -89,6 +119,8 @@ namespace ClientApplicationMVC.Models
             send(request);
             return readUntilEOF();
         }
+
+
 
 
         /// <summary>
