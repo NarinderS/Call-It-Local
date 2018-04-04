@@ -80,7 +80,6 @@ namespace ChatService.Database
                 else
                 {
                     Debug.consoleMsg("Error: No such user: '" + userName + "' in database");
-                    return null;
                 }
 
                 GetChatContacts ret = new GetChatContacts()
@@ -117,7 +116,7 @@ namespace ChatService.Database
                         {
                             sender = reader.GetString("sender"),
                             receiver = reader.GetString("receiver"),
-                            unix_timestamp = reader.GetString("timestamp"),
+                            unix_timestamp = reader.GetInt32("timestamp"),
                             messageContents = reader.GetString("message")
                         };
 
@@ -125,8 +124,7 @@ namespace ChatService.Database
                     } while (reader.Read());
                 else
                 {
-                    Debug.consoleMsg("Error: No such user: '" + userName + "' in database");
-                    return null;
+                    Debug.consoleMsg("Error: No conversation between user: '" + userName + "' and company: '" + compName + "' in database");
                 }
 
                 ChatHistory hist = new ChatHistory()
