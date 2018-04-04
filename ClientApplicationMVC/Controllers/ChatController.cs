@@ -6,7 +6,6 @@ using Messages.ServiceBusRequest.Chat.Requests;
 using Messages.ServiceBusRequest.Chat.Responses;
 
 using System.Web.Mvc;
-using Messages.ServiceBusRequest;
 
 namespace ClientApplicationMVC.Controllers
 {
@@ -44,6 +43,7 @@ namespace ClientApplicationMVC.Controllers
             GetChatContactsResponse contactsResponse = (GetChatContactsResponse)connection.getAllChatContacts(contactsRequest);
             
             ChatHistory firstDisplayedChatHistory = null;
+            var x = contactsResponse.responseData;
 
             if (contactsResponse.responseData.contactNames.Count != 0) {
                 GetChatHistory getHistoryCommand = new GetChatHistory()
@@ -57,8 +57,7 @@ namespace ClientApplicationMVC.Controllers
                 };
                 
                 GetChatHistoryRequest historyRequest = new GetChatHistoryRequest(getHistoryCommand);
-                //Uncomment later
-                //firstDisplayedChatHistory = connection.getChatHistory(historyRequest).responseData.history;
+                firstDisplayedChatHistory = ((GetChatHistoryResponse)connection.getChatHistory(historyRequest)).responseData.history;
             }
             else
             {
@@ -145,12 +144,10 @@ namespace ClientApplicationMVC.Controllers
 
             GetChatHistoryRequest request = new GetChatHistoryRequest(getCommand);
 
-            
-            ServiceBusResponse response = connection.getChatHistory(request);
+            GetChatHistoryResponse response = (GetChatHistoryResponse)connection.getChatHistory(request);
 
             string newConvoHtml = "";
-            //Uncomment later
-            /*
+
             foreach(ChatMessage msg in response.responseData.history.messages)
             {
                 if (msg.sender.Equals(Globals.getUser()))
@@ -170,7 +167,6 @@ namespace ClientApplicationMVC.Controllers
                         "</p>";
                 }
             }
-            */
 
             return Content(newConvoHtml);
         }
