@@ -28,7 +28,7 @@ namespace ChatService.Handlers
             string response = "Success";
             GetChatContacts returnVal = ChatServiceDatabase.getInstance().getChatContacts(message.getCommand.usersname);
 
-            return context.Reply(new GetChatContactsResponse(true, response, returnVal)); ;
+            return context.Reply(new GetChatContactsResponse(true, response, returnVal));
 
         }
     }
