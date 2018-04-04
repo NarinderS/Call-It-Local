@@ -47,7 +47,7 @@ namespace ChatService.Database
             if (openConnection() == true)
             {
                 string query = "INSERT INTO chatHistory(sender,receiver,timestamp,message)" +
-                    "VALUES('" + message.sender + "','" + message.receiver + "','" + message.unix_timestamp + "','" + message.message + "');";
+                    "VALUES('" + message.sender + "','" + message.receiver + "','" + message.unix_timestamp + "','" + message.messageContents + "');";
 
                 MySqlCommand command = new MySqlCommand(query, connection);
                 command.ExecuteNonQuery();
