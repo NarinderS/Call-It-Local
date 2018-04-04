@@ -27,7 +27,7 @@ namespace ChatService.Handlers
             //Error Checking
             string response = "Success";
             GetChatContacts returnVal = ChatServiceDatabase.getInstance().getChatContacts(message.getCommand.usersname);
-            Debug.consoleMsg("Size:" + returnVal.contactNames.Capacity);
+            Debug.consoleMsg("Size:" + returnVal.contactNames.Count);
 
             return context.Reply(new GetChatContactsResponse(true, response, returnVal));
 

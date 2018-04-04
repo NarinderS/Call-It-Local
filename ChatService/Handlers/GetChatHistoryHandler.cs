@@ -1,5 +1,7 @@
-﻿using Messages;
+﻿using ChatService.Database;
+using Messages;
 using Messages.ServiceBusRequest.Chat.Requests;
+using Messages.ServiceBusRequest.Chat.Responses;
 using NServiceBus;
 using NServiceBus.Logging;
 using System;
@@ -20,7 +22,11 @@ namespace ChatService.Handlers
         {
             Debug.consoleMsg("Got to GetChatHistoryHandler");
 
-            return null;
+            //Error Checking
+            string response = "Success";
+            var returnVal = ChatServiceDatabase.getInstance().getChatHistory(message.getCommand.history.user1, message.getCommand.history.user2);
+            Debug.consoleMsg("Leaving to GetChatHistoryHandler");
+            return context.Reply(new GetChatHistoryResponse(true, response, returnVal));
 
         }
     }

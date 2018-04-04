@@ -43,7 +43,6 @@ namespace ClientApplicationMVC.Controllers
             GetChatContactsResponse contactsResponse = (GetChatContactsResponse)connection.getAllChatContacts(contactsRequest);
             
             ChatHistory firstDisplayedChatHistory = null;
-            var x = contactsResponse.responseData;
 
             if (contactsResponse.responseData.contactNames.Count != 0) {
                 GetChatHistory getHistoryCommand = new GetChatHistory()

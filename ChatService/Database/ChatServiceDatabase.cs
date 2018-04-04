@@ -75,6 +75,7 @@ namespace ChatService.Database
                 if (reader.Read())
                     do
                     {
+                        Debug.consoleMsg(reader.GetString("receiver"));
                         companies.Add(reader.GetString("receiver"));
                     } while (reader.Read());
                 else
@@ -87,13 +88,14 @@ namespace ChatService.Database
                     usersname = userName,
                     contactNames = companies
                 };
-
+                Debug.consoleMsg("Leaving Function");
                 closeConnection();
                 return ret;
             }
             else
             {
                 Debug.consoleMsg("Unable to connect to database");
+                closeConnection();
                 return null;
             }
         }
@@ -145,6 +147,7 @@ namespace ChatService.Database
             else
             {
                 Debug.consoleMsg("Unable to connect to database");
+                closeConnection();
                 return null;
             }
         }
@@ -211,6 +214,16 @@ namespace ChatService.Database
                         {
                             "NOT NULL"
                         }, false
+                    ),
+                    new Column
+                    (
+                        "id", "INT(9)",
+                        new string[]
+                        {
+                            "NOT NULL",
+                            "AUTO_INCREMENT",
+                            "UNIQUE"
+                        }, true
                     )
                 }
             )
