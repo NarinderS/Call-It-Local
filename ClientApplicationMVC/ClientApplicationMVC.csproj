@@ -162,6 +162,7 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Huba\ChatHub.cs" />
     <Compile Include="Models\ConnectionManager.cs" />
     <Compile Include="Models\Globals.cs" />
     <Compile Include="Models\PostReview.cs" />
@@ -169,6 +170,7 @@
     <Compile Include="Models\ServiceBusConnection.cs" />
     <Compile Include="Models\ServiceBusInfo.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Startup.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap.css" />
