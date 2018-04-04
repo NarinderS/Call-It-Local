@@ -47,7 +47,7 @@ namespace ChatService.Database
             if (openConnection() == true)
             {
                 string query = "INSERT INTO chatHistory(sender,receiver,timestamp,message)" +
-                    "VALUES('" + message.sender + "','" + message.receiver + "','" + message.timestamp + "','" + message.message + "');";
+                    "VALUES('" + message.sender + "','" + message.receiver + "','" + message.unix_timestamp + "','" + message.message + "');";
 
                 MySqlCommand command = new MySqlCommand(query, connection);
                 command.ExecuteNonQuery();
@@ -60,10 +60,38 @@ namespace ChatService.Database
             }
         }
 
-        public string getChatContacts()
+        public string getChatContacts(string userName)
         {
+            if (openConnection() == true)
+            {
+                string query = "SELECT DISTINCT receiver FROM " + dbname + ".chatHistory" + " WHERE sender ='" + userName + "';";
 
-            return "Test return";
+                MySqlCommand command = new MySqlCommand(query, connection);
+                MySqlDataReader reader = command.ExecuteReader();
+                
+                string companies = "";
+                if (reader.Read())
+                    do
+                    {
+                        companies += reader.GetString("receiver");
+                        companies += ", ";
+                    } while (reader.Read());
+                else
+                {
+                    Debug.consoleMsg("Error: No such user: '" + userName + "' in database");
+                    return null;
+                }
+
+                companies = companies.Substring(0, companies.Length - 2);
+
+                closeConnection();
+                return companies;
+            }
+            else
+            {
+                Debug.consoleMsg("Unable to connect to database");
+                return null;
+            }
         }
 
         public string getChatHistory()
