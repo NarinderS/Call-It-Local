@@ -6,6 +6,7 @@ using Messages.ServiceBusRequest.Chat.Requests;
 using Messages.ServiceBusRequest.Chat.Responses;
 
 using System.Web.Mvc;
+using System;
 
 namespace ClientApplicationMVC.Controllers
 {
@@ -169,5 +170,18 @@ namespace ClientApplicationMVC.Controllers
 
             return Content(newConvoHtml);
         }
+
+        /*
+        [HttpGet]
+        public ActionResult NewConversation(string companyName)
+        {
+            Int32 unixTimestamp = (Int32)(DateTime.UtcNow.Subtract(new DateTime(1970, 1, 1))).TotalSeconds;
+            SendMessage(companyName, unixTimestamp, "Hello, I would like to start a conversation!");
+            return RedirectToAction("Index");
+        }
+        */
+        
     }
+
+    
 }
