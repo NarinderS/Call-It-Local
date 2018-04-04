@@ -36,7 +36,7 @@ namespace AuthenticationService.Communication
             
 
             SendOptions sendOptions = new SendOptions();
-            sendOptions.SetDestination("Chat");
+            sendOptions.SetDestination("ChatBox");
 
 
             return requestingEndpoint.Request<ServiceBusResponse>(request, sendOptions).
@@ -48,7 +48,7 @@ namespace AuthenticationService.Communication
 
 
             SendOptions sendOptions = new SendOptions();
-            sendOptions.SetDestination("Chat");
+            sendOptions.SetDestination("ChatBox");
 
 
             return requestingEndpoint.Request<ServiceBusResponse>(request, sendOptions).
@@ -60,7 +60,7 @@ namespace AuthenticationService.Communication
 
 
             SendOptions sendOptions = new SendOptions();
-            sendOptions.SetDestination("Chat");
+            sendOptions.SetDestination("ChatBox");
 
 
             return requestingEndpoint.Request<ServiceBusResponse>(request, sendOptions).

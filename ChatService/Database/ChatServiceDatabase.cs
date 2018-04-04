@@ -34,6 +34,7 @@ namespace ChatService.Database
             {
                 Debug.consoleMsg("Creating instance of the ChatServiceDatabase");
                 instance = new ChatServiceDatabase();
+                return instance;
             }
             
             else
