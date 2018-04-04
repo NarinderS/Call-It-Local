@@ -103,7 +103,7 @@ namespace ChatService.Database
         {
             if (openConnection() == true)
             {
-                string query = "SELECT * FROM " + dbname + ".chathistory" + " WHERE (sender ='" + userName + "' AND receiver='" + compName + "') OR (sender ='" + compName +"' AND receiver ='" + userName + "') ORDER BY unix_timestamp;";
+                string query = "SELECT * FROM " + dbname + ".chathistory" + " WHERE ((sender ='" + userName + "' AND receiver='" + compName + "') OR (sender ='" + compName +"' AND receiver ='" + userName + "')) ORDER BY timestamp;";
 
                 MySqlCommand command = new MySqlCommand(query, connection);
                 MySqlDataReader reader = command.ExecuteReader();
@@ -200,7 +200,7 @@ namespace ChatService.Database
                     ),
                     new Column
                     (
-                        "timestamp", "VARCHAR(10)",
+                        "timestamp", "INT(10)",
                         new string[]
                         {
                             "NOT NULL",
