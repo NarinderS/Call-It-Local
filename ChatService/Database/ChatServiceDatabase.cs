@@ -70,7 +70,6 @@ namespace ChatService.Database
                 MySqlCommand command = new MySqlCommand(query, connection);
                 MySqlDataReader reader = command.ExecuteReader();
 
-                ret.usersname = userName;
                 List<string> companies = new List<string>();
 
                 if (reader.Read())
