@@ -1,4 +1,6 @@
-﻿using Messages;
+﻿using ChatService.Database;
+using Messages;
+using Messages.ServiceBusRequest;
 using Messages.ServiceBusRequest.Chat.Requests;
 using NServiceBus;
 using NServiceBus.Logging;
@@ -20,7 +22,11 @@ namespace ChatService.Handlers
         {
             Debug.consoleMsg("Got to SendMessageRequestHandler");
 
-            return null;
+            //Error Checking
+            string response = "Success";
+            ChatServiceDatabase.getInstance().saveMessage(message.message);
+            Debug.consoleMsg("Leaving to SendMessageRequestHandler");
+            return context.Reply(new ServiceBusResponse(true, response));
 
         }
     }
