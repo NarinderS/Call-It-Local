@@ -60,7 +60,7 @@ namespace ChatService.Database
             }
         }
 
-        public string getChatContacts(string userName)
+        public GetChatContacts getChatContacts(string userName)
         {
             if (openConnection() == true)
             {
@@ -68,13 +68,14 @@ namespace ChatService.Database
 
                 MySqlCommand command = new MySqlCommand(query, connection);
                 MySqlDataReader reader = command.ExecuteReader();
-                
-                string companies = "";
+
+                GetChatContacts ret = new GetChatContacts();
+                ret.usersname = userName;
+
                 if (reader.Read())
                     do
                     {
-                        companies += reader.GetString("receiver");
-                        companies += ", ";
+                        ret.contactNames.Add(reader.GetString("receiver"));
                     } while (reader.Read());
                 else
                 {
@@ -82,10 +83,8 @@ namespace ChatService.Database
                     return null;
                 }
 
-                companies = companies.Substring(0, companies.Length - 2);
-
                 closeConnection();
-                return companies;
+                return ret;
             }
             else
             {
