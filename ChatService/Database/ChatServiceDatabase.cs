@@ -22,12 +22,47 @@ namespace ChatService.Database
     /// </summary>
     public partial class ChatServiceDatabase : AbstractDatabase
     {
+
+        // Constructor 
         private ChatServiceDatabase()
         {
         }
 
+        public static ChatServiceDatabase getInstance()
+        {
+            if(instance == null)
+            {
+                Debug.consoleMsg("Creating instance of the ChatServiceDatabase");
+                instance = new ChatServiceDatabase();
+            }
+            
+            else
+            {
+                return instance;
+            }
+        }
+
+        public void saveMessage(ChatMessage message)
+        {
+            if (openConnection() == true)
+            {
+                string query = "INSERT INTO chatHistory(sender,receiver,timestamp,message)" +
+                    "VALUES('" + message.sender + "','" + message.receiver + "','" + message.timestamp + "','" + message.message + "');";
+
+                MySqlCommand command = new MySqlCommand(query, connection);
+                command.ExecuteNonQuery();
+                closeConnection();
+
+            }
+            else
+            {
+                Debug.consoleMsg("Unable to connect to database");
+            }
+        }
+
         public string getChatContacts()
         {
+
             return "Test return";
         }
 
@@ -66,21 +101,22 @@ namespace ChatService.Database
                 "chatHistory",
                 new Column[]
                 {
+                    
                     new Column
                     (
-                        "user1", "VARCHAR(40)",
+                        "sender", "VARCHAR(40)",
                         new string[]
                         {
                             "NOT NULL",
-                        }, true
+                        }, false
                     ),
                     new Column
                     (
-                        "user2", "VARCHAR(40)",
+                        "receiver", "VARCHAR(40)",
                         new string[]
                         {
                             "NOT NULL",
-                        }, true
+                        }, false
                     ),
                     new Column
                     (
