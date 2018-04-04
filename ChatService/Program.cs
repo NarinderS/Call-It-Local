@@ -1,4 +1,5 @@
 ﻿using NServiceBus;
+using Messages;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -26,7 +27,7 @@ namespace ChatService
             Console.Title = "ChatBox";
 
             //Create a new Endpoint configuration with the name "Echo"
-            EndpointConfiguration endpointConfiguration = new EndpointConfiguration("Echo");
+            EndpointConfiguration endpointConfiguration = new EndpointConfiguration("ChatBox");
 
             //These two lines prevemt the endpoint configuration from scanning the MySql dll. 
             //This is done because it speeds up the startup time, and it prevents a rare but 
@@ -51,7 +52,7 @@ namespace ChatService
             var routing = transport.Routing();
 
             //Register to the AsIsEcho event published by the Authentication endpoint
-            routing.RegisterPublisher(typeof(AsIsEchoEvent), "Authentication");
+
 
             //Start the endpoint with the configuration defined above. It should be noted that any changes made to the endpointConfiguration after an endpoint is instantiated will not apply to any endpoints that have already been instantiated
             var endpointInstance = await Endpoint.Start(endpointConfiguration).ConfigureAwait(false);
@@ -66,11 +67,11 @@ namespace ChatService
                 switch (entry)
                 {
                     case ("DELETEDB"):
-                        EchoServiceDatabase.getInstance().deleteDatabase();
+                        ChatServiceDatabase.getInstance().deleteDatabase();
                         Debug.consoleMsg("Delete database attempt complete");
                         break;
                     case ("CREATEDB"):
-                        EchoServiceDatabase.getInstance().createDB();
+                        ChatServiceDatabase.getInstance().createDB();
                         Debug.consoleMsg("Completed Database Creation Attempt.");
                         break;
                     default:
