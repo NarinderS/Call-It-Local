@@ -103,24 +103,43 @@ namespace ChatService.Database
         {
             if (openConnection() == true)
             {
-                string query = "SELECT * FROM " + dbname + ".chathistory" + " WHERE (sender ='" + userName + "' AND receiver='" + compName + "') OR (sender ='" + compName +"' AND receiver ='" + userName + "');";
+                string query = "SELECT * FROM " + dbname + ".chathistory" + " WHERE (sender ='" + userName + "' AND receiver='" + compName + "') OR (sender ='" + compName +"' AND receiver ='" + userName + "') ORDER BY unix_timestamp;";
 
                 MySqlCommand command = new MySqlCommand(query, connection);
                 MySqlDataReader reader = command.ExecuteReader();
 
-                GetChatContacts ret = new GetChatContacts();
-                ret.usersname = userName;
+                List<ChatMessage> messageList = new List<ChatMessage>();
 
                 if (reader.Read())
                     do
                     {
-                        ret.contactNames.Add(reader.GetString("receiver"));
+                        ChatMessage temp = new ChatMessage()
+                        {
+                            sender = reader.GetString("sender"),
+                            receiver = reader.GetString("receiver"),
+                            unix_timestamp = reader.GetString("timestamp"),
+                            messageContents = reader.GetString("message")
+                        };
+
+                        messageList.Add(temp);
                     } while (reader.Read());
                 else
                 {
                     Debug.consoleMsg("Error: No such user: '" + userName + "' in database");
                     return null;
                 }
+
+                ChatHistory hist = new ChatHistory()
+                {
+                    messages = messageList,
+                    user1 = userName,
+                    user2 = compName
+                };
+
+                GetChatHistory ret = new GetChatHistory()
+                {
+                    history = hist
+                };
 
                 closeConnection();
                 return ret;
@@ -130,7 +149,6 @@ namespace ChatService.Database
                 Debug.consoleMsg("Unable to connect to database");
                 return null;
             }
-            return null;
         }
     }
 
