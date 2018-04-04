@@ -21,7 +21,6 @@ namespace AuthenticationService.Communication
                     return getChatHistory((ChatServiceRequest)request);
                 case (ChatRequest.sendMessage):
                     return sendMessage((ChatServiceRequest)request);
-
                 default:
                     return new ServiceBusResponse(false, "Error: Invalid Request. Request received was:" + request.requestType.ToString());
             }
