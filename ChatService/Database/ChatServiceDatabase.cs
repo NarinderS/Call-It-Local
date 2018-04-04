@@ -46,7 +46,7 @@ namespace ChatService.Database
         {
             if (openConnection() == true)
             {
-                string query = "INSERT INTO chatHistory(sender,receiver,timestamp,message)" +
+                string query = "INSERT INTO chathistory(sender,receiver,timestamp,message)" +
                     "VALUES('" + message.sender + "','" + message.receiver + "','" + message.unix_timestamp + "','" + message.messageContents + "');";
 
                 MySqlCommand command = new MySqlCommand(query, connection);
@@ -64,7 +64,46 @@ namespace ChatService.Database
         {
             if (openConnection() == true)
             {
-                string query = "SELECT DISTINCT receiver FROM " + dbname + ".chatHistory" + " WHERE sender ='" + userName + "';";
+                string query = "SELECT DISTINCT receiver FROM " + dbname + ".chathistory" + " WHERE sender ='" + userName + "';";
+
+                MySqlCommand command = new MySqlCommand(query, connection);
+                MySqlDataReader reader = command.ExecuteReader();
+
+                ret.usersname = userName;
+                List<string> companies = new List<string>();
+
+                if (reader.Read())
+                    do
+                    {
+                        companies.Add(reader.GetString("receiver"));
+                    } while (reader.Read());
+                else
+                {
+                    Debug.consoleMsg("Error: No such user: '" + userName + "' in database");
+                    return null;
+                }
+
+                GetChatContacts ret = new GetChatContacts()
+                {
+                    usersname = userName,
+                    contactNames = companies
+                };
+
+                closeConnection();
+                return ret;
+            }
+            else
+            {
+                Debug.consoleMsg("Unable to connect to database");
+                return null;
+            }
+        }
+
+        public GetChatHistory getChatHistory(string userName, string compName)
+        {
+            if (openConnection() == true)
+            {
+                string query = "SELECT * FROM " + dbname + ".chathistory" + " WHERE (sender ='" + userName + "' AND receiver='" + compName + "') OR (sender ='" + compName +"' AND receiver ='" + userName + "');";
 
                 MySqlCommand command = new MySqlCommand(query, connection);
                 MySqlDataReader reader = command.ExecuteReader();
@@ -91,11 +130,7 @@ namespace ChatService.Database
                 Debug.consoleMsg("Unable to connect to database");
                 return null;
             }
-        }
-
-        public string getChatHistory()
-        {
-            return "Test return";
+            return null;
         }
     }
 
@@ -125,7 +160,7 @@ namespace ChatService.Database
             new Table
             (
                 dbname,
-                "chatHistory",
+                "chathistory",
                 new Column[]
                 {
                     
