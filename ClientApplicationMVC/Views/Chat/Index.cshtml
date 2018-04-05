@@ -1,5 +1,5 @@
 ﻿<!--
-    This is the index page for the Chat controller    
+    This is the index page for the Chat controller
 -->
 
 <link href="~/Content/ChatStyles.css" rel="stylesheet" type="text/css" />
@@ -23,10 +23,11 @@
         }
 
     </div>
-    <div style="margin-left: 205px; height: inherit;"> <!--This area contains the conversation and the message typing area-->
+    <div style="margin-left: 205px; height: inherit;">
+        <!--This area contains the conversation and the message typing area-->
         <div id="ConversationDisplayArea">
             <!--Here is where the messages for the current conversation are displayed-->
-            @foreach(Messages.DataTypes.Database.Chat.ChatMessage msg in ViewBag.DisplayedChatHistory.messages)
+            @foreach (Messages.DataTypes.Database.Chat.ChatMessage msg in ViewBag.DisplayedChatHistory.messages)
             {
                 if (msg.sender.Equals(ClientApplicationMVC.Models.Globals.getUser()))
                 {
@@ -58,8 +59,10 @@
 </div>
 
 
-@section scripts{
-    
-<script type="text/javascript" src="~/Scripts/Chat/ChatFunctions.js"></script>
 
+@section scripts{
+    <script type="text/javascript" src="~/Scripts/Chat/ChatFunctions.js"></script>
+    <script type="text/javascript" src="~/Scripts/jquery-1.10.2.min.js"></script>
+    <script type="text/javascript" src="~/Scripts/jquery.signalR-2.2.3.min.js"></script>
+    <script type="text/javascript" src="~/signalr/hubs"></script>
 }

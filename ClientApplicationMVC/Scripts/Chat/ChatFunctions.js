@@ -1,10 +1,34 @@
 ﻿
 var currentSelectedChat = null;
+var myConnection = null;
 
 /**
 *   This function will set the on click functions for the send button and chat instances.
 */
 $(function () {//This function is executed after the entire page is loaded
+
+    // Initialize the client-side connection 
+    myConnection = $.connection.hub.createHubProxy("ChatHub");
+
+    myConnection.client.reloadPage = function () {
+        $.ajax({
+            method: "GET",
+            url: "/Chat/Conversation",
+            data: {
+                otherUser: currentSelectedChat
+            },
+            success: function (data) {
+                $("#ConversationDisplayArea").html(data);
+            }
+        });
+
+    };
+
+    $.connection.hub.start().done(function () {
+        
+    });
+
+
     $("#SendButton").click(sendMessage);
     $("#ChatInstancesList").children().each(function () {
         $(this).click(chatInstanceSelected);
@@ -20,6 +44,7 @@ $(function () {//This function is executed after the entire page is loaded
 *   This function will reset the message box and append the message the user sent to the message display area
  */
 function sendMessage() {
+
     var userData = $("#textUserMessage").val();
     if ($.trim(userData) == "") {
         return;
@@ -33,7 +58,12 @@ function sendMessage() {
     $.post("/Chat/SendMessage", {
         receiver: recipient,
         timestamp: timestamp,
-        message: userData
+        message: userData,
+
+        // Calls the server to refresh the chatbox and use AJAX to append the new method
+        success: function (data) {
+            myConnection.server.reloadPage();
+        }
     });
 }
 
@@ -41,7 +71,7 @@ function sendMessage() {
  * This function adds the given text to the user and indicates the sender of the text.
  * @param {string} text - The content of the message
  * @param {string} sender - The username of the sender. If it is "You" it will be a different colour.
- */s
+ */
 function addTextToChatBox(text, sender) {
     var newMessageHtml =
         "<p class='message'>" +
