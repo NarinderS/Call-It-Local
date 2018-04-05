@@ -162,7 +162,7 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Huba\ChatHub.cs" />
+    <Compile Include="Hubs\ChatHub.cs" />
     <Compile Include="Models\ConnectionManager.cs" />
     <Compile Include="Models\Globals.cs" />
     <Compile Include="Models\PostReview.cs" />
