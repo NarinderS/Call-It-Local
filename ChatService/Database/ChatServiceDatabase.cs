@@ -11,6 +11,7 @@ using MySql.Data.MySqlClient;
 
 using System;
 using System.Collections.Generic;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -48,9 +49,13 @@ namespace ChatService.Database
             if (openConnection() == true)
             {
                 string query = "INSERT INTO chathistory(sender,receiver,timestamp,message)" +
-                    "VALUES('" + message.sender + "','" + message.receiver + "','" + message.unix_timestamp + "','" + message.messageContents + "');";
+                    "VALUES(@Sender,@Receiver,@Timestamp,@Content);";
 
                 MySqlCommand command = new MySqlCommand(query, connection);
+                command.Parameters.AddWithValue("@Sender", message.sender);
+                command.Parameters.AddWithValue("@Receiver", message.receiver);
+                command.Parameters.AddWithValue("@Timestamp", message.unix_timestamp);
+                command.Parameters.AddWithValue("@Content", message.messageContents);
                 command.ExecuteNonQuery();
                 closeConnection();
 
@@ -65,9 +70,11 @@ namespace ChatService.Database
         {
             if (openConnection() == true)
             {
-                string query = "SELECT DISTINCT receiver FROM " + dbname + ".chathistory" + " WHERE sender ='" + userName + "';";
-
+                string query = "SELECT DISTINCT receiver FROM " + dbname + ".chathistory WHERE sender = @Username" +
+                    " UNION SELECT DISTINCT sender FROM " + dbname + ".chathistory WHERE receiver = @Username;";
+                
                 MySqlCommand command = new MySqlCommand(query, connection);
+                command.Parameters.AddWithValue("@Username", userName);
                 MySqlDataReader reader = command.ExecuteReader();
 
                 List<string> companies = new List<string>();
@@ -103,10 +110,13 @@ namespace ChatService.Database
         public GetChatHistory getChatHistory(string userName, string compName)
         {
             if (openConnection() == true)
-            {
-                string query = "SELECT * FROM " + dbname + ".chathistory" + " WHERE ((sender ='" + userName + "' AND receiver='" + compName + "') OR (sender ='" + compName +"' AND receiver ='" + userName + "')) ORDER BY timestamp;";
+             { 
+
+                string query = "SELECT * FROM " + dbname + ".chathistory WHERE ((sender = @Username AND receiver= @Company) OR (sender = @Company AND receiver = @Username)) ORDER BY timestamp;";
 
                 MySqlCommand command = new MySqlCommand(query, connection);
+                command.Parameters.AddWithValue("@Username", userName);
+                command.Parameters.AddWithValue("@Company", compName);
                 MySqlDataReader reader = command.ExecuteReader();
 
                 List<ChatMessage> messageList = new List<ChatMessage>();
