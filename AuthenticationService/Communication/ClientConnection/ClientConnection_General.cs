@@ -89,6 +89,8 @@ namespace AuthenticationService.Communication
                     return companyRequest((CompanyDirectoryServiceRequest)request);
                 case (Service.Chat):
                     return chatRequest((ChatServiceRequest)request);
+                case (Service.Weather):
+                    return weatherRequest(request);
                 default:
                     return new ServiceBusResponse(false, "Error: Invalid request. Did not specify a valid service type. Specified type was: " + request.serviceRequested.ToString());
             }

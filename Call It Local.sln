@@ -15,7 +15,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CompanyService", "CompanySe
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ChatService", "ChatService\ChatService.csproj", "{A7B767B0-9073-4489-B7A6-8181A689C51D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WeatherService", "WeatherService\WeatherService.csproj", "{318C892F-A815-402E-8828-4595C30DA4E5}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WeatherService", "WeatherService\WeatherService.csproj", "{0C30231E-7648-42F3-941F-078D6C5B8D67}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -47,10 +47,10 @@ Global
 		{A7B767B0-9073-4489-B7A6-8181A689C51D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A7B767B0-9073-4489-B7A6-8181A689C51D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A7B767B0-9073-4489-B7A6-8181A689C51D}.Release|Any CPU.Build.0 = Release|Any CPU
-		{318C892F-A815-402E-8828-4595C30DA4E5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{318C892F-A815-402E-8828-4595C30DA4E5}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{318C892F-A815-402E-8828-4595C30DA4E5}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{318C892F-A815-402E-8828-4595C30DA4E5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0C30231E-7648-42F3-941F-078D6C5B8D67}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0C30231E-7648-42F3-941F-078D6C5B8D67}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0C30231E-7648-42F3-941F-078D6C5B8D67}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0C30231E-7648-42F3-941F-078D6C5B8D67}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

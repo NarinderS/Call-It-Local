@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace AuthenticationService.Communication.ClientConnection
+namespace AuthenticationService.Communication
 {
     partial class ClientConnection
     {

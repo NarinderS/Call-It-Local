@@ -65,6 +65,7 @@
     <Compile Include="Communication\ClientConnection\ClientConnection_Company.cs" />
     <Compile Include="Communication\ClientConnection\ClientConnection_Echo.cs" />
     <Compile Include="Communication\ClientConnection\ClientConnection_General.cs" />
+    <Compile Include="Communication\ClientConnection\ClientConnection_Weather.cs" />
     <Compile Include="Database\AuthenticationDatabase.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
