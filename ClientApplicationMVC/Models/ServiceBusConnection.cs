@@ -100,10 +100,20 @@ namespace ClientApplicationMVC.Models
             return readUntilEOF();
         }
 
-        
+
 
 
         #endregion ChatServiceMessages
+
+        #region WeatherServiceMessages
+
+        public ServiceBusResponse getWeather(ServiceBusRequest request)
+        {
+            send(request);
+            return readUntilEOF();
+        }
+
+        #endregion WeatherServiceMessages
 
 
         #region EchoServiceMessages
