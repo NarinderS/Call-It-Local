@@ -14,6 +14,7 @@ using WebApplication1.Models;
 using System.Net.Http.Headers;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
+using Messages.ServiceBusRequest.Weather;
 
 namespace ClientApplicationMVC.Controllers
 {
@@ -186,8 +187,8 @@ namespace ClientApplicationMVC.Controllers
             }
 
             //Call Weather Service
-            ServiceBusRequest info;
-            ServiceBusResponse response;
+            WeatherServiceRequest info = new WeatherServiceRequest(value.locations[0]);
+            WeatherServiceResponse response = (WeatherServiceResponse)connection.getWeather(info);
             //Use JSON 
 
             return View("DisplayCompany");

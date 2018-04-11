@@ -17,6 +17,7 @@ using Messages.ServiceBusRequest.CompanyDirectory.Responses;
 using Messages.ServiceBusRequest.Chat.Requests;
 using Messages.ServiceBusRequest.Chat.Responses;
 using Messages.DataTypes.Database.Chat;
+using Messages.ServiceBusRequest.Weather;
 
 namespace ClientApplicationMVC.Models
 {
@@ -107,7 +108,7 @@ namespace ClientApplicationMVC.Models
 
         #region WeatherServiceMessages
 
-        public ServiceBusResponse getWeather(ServiceBusRequest request)
+        public ServiceBusResponse getWeather(WeatherServiceRequest request)
         {
             send(request);
             return readUntilEOF();
