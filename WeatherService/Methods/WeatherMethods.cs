@@ -10,7 +10,7 @@ namespace WeatherService.Methods
     class WeatherMethods
     {
         //Harjje add methods
-        public WeatherReturnObject getWeatherStuff(string loc)
+        public static WeatherReturnObject getWeatherStuff(string loc)
         {
             WeatherReturnObject returnObj = new WeatherReturnObject();
             string locations = getCompanyLocation(loc);
@@ -26,7 +26,7 @@ namespace WeatherService.Methods
             string locationKey = (string)obj.SelectToken("Key");
 
             HttpClient client = new HttpClient();
-            HttpResponseMessage response = client.GetAsync("http://dataservice.accuweather.com/currentconditions/v1/" + locationKey +"?apikey=g7mFC2QG1JgcakSVgunj3WoAXXVtLcIV&details=true").Result;
+            HttpResponseMessage response = client.GetAsync("http://dataservice.accuweather.com/currentconditions/v1/" + locationKey + "?apikey=GBVmAs0AxohAnsyVmdCzO7GKw3cPfgCd&details=true").Result;
             string result = response.Content.ReadAsStringAsync().Result;
 
             if (result.Equals("[]"))
@@ -46,10 +46,10 @@ namespace WeatherService.Methods
             return returnObj;
         }
 
-        private string getCompanyLocation(string loc)
+        private static string getCompanyLocation(string loc)
         {
             HttpClient client = new HttpClient();
-            HttpResponseMessage response = client.GetAsync("http://dataservice.accuweather.com/locations/v1/cities/search?apikey=g7mFC2QG1JgcakSVgunj3WoAXXVtLcIV&q=" + loc).Result;
+            HttpResponseMessage response = client.GetAsync("http://dataservice.accuweather.com/locations/v1/cities/search?apikey=GBVmAs0AxohAnsyVmdCzO7GKw3cPfgCd&q=" + loc).Result;
             string rValue = response.Content.ReadAsStringAsync().Result;
             return rValue;
         }

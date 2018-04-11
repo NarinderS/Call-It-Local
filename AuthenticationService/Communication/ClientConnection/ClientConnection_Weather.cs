@@ -1,4 +1,5 @@
 ﻿using Messages.ServiceBusRequest;
+using NServiceBus;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,7 +12,12 @@ namespace AuthenticationService.Communication
     {
         private ServiceBusResponse weatherRequest(ServiceBusRequest request)
         {
-            return null;
+            SendOptions sendOptions = new SendOptions();
+            sendOptions.SetDestination("Weather");
+
+
+            return requestingEndpoint.Request<ServiceBusResponse>(request, sendOptions).
+                ConfigureAwait(false).GetAwaiter().GetResult();
         }
     }
 }

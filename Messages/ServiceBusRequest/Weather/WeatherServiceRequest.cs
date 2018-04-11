@@ -17,6 +17,8 @@ namespace Messages.ServiceBusRequest.Weather
             this.location= location;
         }
 
+
+
         public string location;
     }
 }

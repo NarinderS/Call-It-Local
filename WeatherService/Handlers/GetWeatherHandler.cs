@@ -1,4 +1,5 @@
 ﻿using Messages;
+using Messages.DataTypes.Database.Weather;
 using Messages.ServiceBusRequest;
 using Messages.ServiceBusRequest.Chat.Requests;
 using Messages.ServiceBusRequest.Weather;
@@ -9,6 +10,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using WeatherService.Methods;
 
 namespace WeatherService.Handlers
 {
@@ -19,12 +21,14 @@ namespace WeatherService.Handlers
         public Task Handle(WeatherServiceRequest message, IMessageHandlerContext context)
         {
             Debug.consoleMsg("Got to GetWeatherHandler");
-            
-            
 
-            
 
-            return null;
+            WeatherReturnObject returnVal = WeatherMethods.getWeatherStuff(message.location);
+            Debug.consoleMsg(returnVal.realFeelTemperature.ToString());
+            string response = "success";
+
+
+            return context.Reply(new WeatherServiceResponse(true, response, returnVal));
 
         }
     }
