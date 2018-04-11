@@ -189,7 +189,9 @@ namespace ClientApplicationMVC.Controllers
             //Call Weather Service
             WeatherServiceRequest info = new WeatherServiceRequest(value.locations[0]);
             WeatherServiceResponse response = (WeatherServiceResponse)connection.getWeather(info);
-            //Use JSON 
+            ViewBag.weatherText = response.returnData.weatherText;
+            ViewBag.temperature = response.returnData.temperature;
+            ViewBag.realFealTemperature = response.returnData.realFeelTemperature;
 
             return View("DisplayCompany");
         }
