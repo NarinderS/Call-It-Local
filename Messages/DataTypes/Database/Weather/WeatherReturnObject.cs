@@ -12,6 +12,6 @@ namespace Messages.DataTypes.Database.Weather
         public string weatherText { get; set; }
         public double temperature { get; set; }
         public double realFeelTemperature { get; set; }
-
+        public int weatherIcon { get; set; }
     }
 }
