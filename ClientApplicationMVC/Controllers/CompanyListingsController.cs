@@ -31,7 +31,6 @@ namespace ClientApplicationMVC.Controllers
             if (Globals.isLoggedIn())
             {
                 ViewBag.Companylist = null;
-
                 return View("Index");
             }
             ViewBag.DebugMessage = "User Is not logged in (global)";
@@ -185,6 +184,11 @@ namespace ClientApplicationMVC.Controllers
             {
                 ViewBag.reviews = " No reviews found <br/> ";
             }
+
+            //Call Weather Service
+            ServiceBusRequest info;
+            ServiceBusResponse response;
+            //Use JSON 
 
             return View("DisplayCompany");
         }
