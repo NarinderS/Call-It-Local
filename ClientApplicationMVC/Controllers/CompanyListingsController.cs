@@ -193,8 +193,17 @@ namespace ClientApplicationMVC.Controllers
             ViewBag.weatherText = response.returnData.weatherText;
             ViewBag.temperature = response.returnData.temperature;
             ViewBag.realFeelTemperature = response.returnData.realFeelTemperature;
-            ViewBag.weatherIcon = response.returnData.weatherIcon;
-            
+            if(response.returnData.weatherIcon < 10)
+            {
+                ViewBag.weatherIcon = "https://apidev.accuweather.com/developers/Media/Default/WeatherIcons/0" + response.returnData.weatherIcon + "-s.png";
+
+            }
+            else
+            {
+                ViewBag.weatherIcon = "https://apidev.accuweather.com/developers/Media/Default/WeatherIcons/" + response.returnData.weatherIcon + "-s.png";
+
+            }
+
 
             return View("DisplayCompany");
         }
