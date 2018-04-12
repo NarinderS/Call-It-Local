@@ -15,6 +15,10 @@
         <p>@location</p>
         <br />
     }
+    <p>Current Weather Conditions:@ViewBag.weatherText</p> <img src="@ViewBag.weatherIcon" alt="Weather Icon" />
+    <p>Temerpature: @ViewBag.temperature °C</p>
+    <p>Real Temperature: @ViewBag.realFeelTemperature °C</p>
+    
 </div>
 @using (Html.BeginForm("NewConversation", "Chat", FormMethod.Get))
 {
@@ -106,10 +110,7 @@
 
 
 
-<h1>@ViewBag.weatherText</h1>
-<h1>Temerpature: @ViewBag.temperature</h1>
-<h1>Real Temperature: @ViewBag.realFeelTemperature</h1>
-<img src="@ViewBag.weatherIcon" alt="Weather Icon" />
+
 
 
 
