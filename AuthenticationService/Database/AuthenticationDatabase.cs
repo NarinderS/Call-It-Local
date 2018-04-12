@@ -43,14 +43,18 @@ namespace AuthenticationService.Database
             string message = "";
             if(openConnection() == true)
             {
-                string query = @"INSERT INTO user(username, password, address, phonenumber, email, type) " +
-                    @"VALUES('" + accountInfo.username + @"', '" + accountInfo.password + 
-                    @"', '" + accountInfo.address + @"', '" + accountInfo.phonenumber + 
-                    @"', '" + accountInfo.email + @"', '" + accountInfo.type.ToString() + @"');";
+                string query = "INSERT INTO user(username, password, address, phonenumber, email, type) " +
+                    "VALUES(@Username,@Password,@Address,@Number,@Email,@Type);";
 
                 try
                 {
                     MySqlCommand command = new MySqlCommand(query, connection);
+                    command.Parameters.AddWithValue("@Username", accountInfo.username);
+                    command.Parameters.AddWithValue("@Password", accountInfo.password);
+                    command.Parameters.AddWithValue("@Address", accountInfo.address);
+                    command.Parameters.AddWithValue("@Number", accountInfo.phonenumber);
+                    command.Parameters.AddWithValue("@Email", accountInfo.email);
+                    command.Parameters.AddWithValue("@Type", accountInfo.type.ToString());
                     command.ExecuteNonQuery();
                     result = true;
                 }
@@ -89,9 +93,8 @@ namespace AuthenticationService.Database
         /// <returns>True if the info corresponds to an entry in the database, false otherwise</returns>
         public ServiceBusResponse isValidUserInfo(string username, string password)
         {
-            string query = @"SELECT * FROM " + databaseName + @".user " +
-                @"WHERE username='" + username + @"' " +
-                @"AND password='" + password + @"';";
+            string query = "SELECT * FROM " + databaseName + ".user " +
+                "WHERE username = @Username AND password = @Password;";
             
             bool result = false;
             string message = "";
@@ -101,6 +104,8 @@ namespace AuthenticationService.Database
                 try
                 {
                     MySqlCommand command = new MySqlCommand(query, connection);
+                    command.Parameters.AddWithValue("@Username", username);
+                    command.Parameters.AddWithValue("@Password", password);
                     MySqlDataReader dataReader = command.ExecuteReader();
                     result = dataReader.Read();
                     dataReader.Close();

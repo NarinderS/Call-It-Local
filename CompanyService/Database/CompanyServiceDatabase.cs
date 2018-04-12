@@ -46,11 +46,15 @@ namespace CompanyService.Database
                 */
                 
                 
-                    string query = "INSERT INTO companies(companyName,phoneNumber,email,locations)" +
-                        "VALUES('" + account.username + "','" + account.phonenumber + "','" + account.email + "','" + account.address + "');";
+                string query = "INSERT INTO companies(companyName,phoneNumber,email,locations)" +
+                   "VALUES(@Username,@Phonenumber,@Email,@Address);";
 
-                    MySqlCommand command = new MySqlCommand(query, connection);
-                    command.ExecuteNonQuery();
+                MySqlCommand command = new MySqlCommand(query, connection);
+                command.Parameters.AddWithValue("@Username", account.username);
+                command.Parameters.AddWithValue("@Phonenumber", account.phonenumber);
+                command.Parameters.AddWithValue("@Email", account.email);
+                command.Parameters.AddWithValue("@Address", account.address);  
+                command.ExecuteNonQuery();
                 closeConnection();
 
             } else
@@ -67,9 +71,13 @@ namespace CompanyService.Database
                 for (int i = 0; i < company.locations.Length; i++)
                 {
                     string query = "INSERT INTO companies(companyName,phoneNumber,email,locations)" +
-                        "VALUES('" + company.companyName + "','" + company.phoneNumber + "','" + company.email + "','" + company.locations[i] + "');";
+                        "VALUES(@Name,@Number,@Email,@Location);";
 
                     MySqlCommand command = new MySqlCommand(query, connection);
+                    command.Parameters.AddWithValue("@Name", company.companyName);
+                    command.Parameters.AddWithValue("@Number", company.phoneNumber);
+                    command.Parameters.AddWithValue("@Email", company.email);
+                    command.Parameters.AddWithValue("@Location", company.locations[i]);
                     command.ExecuteNonQuery();
                 }
 
@@ -86,9 +94,10 @@ namespace CompanyService.Database
         {
             if (openConnection() == true)
             {
-                string query = "SELECT * FROM " + dbname + ".companies"+" WHERE companyName='"+companyName+"';";
+                string query = "SELECT * FROM " + dbname + ".companies"+" WHERE companyName = @Name;";
 
                 MySqlCommand command = new MySqlCommand(query, connection);
+                command.Parameters.AddWithValue("@Name", companyName);
                 MySqlDataReader reader = command.ExecuteReader();
                 CompanyInstance ret = new CompanyInstance(companyName);
                 List<string> locs = new List<string>();
@@ -124,9 +133,10 @@ namespace CompanyService.Database
             if (openConnection() == true)
             {
                 Debug.consoleMsg("Got to Point 1");
-                string query = "SELECT * FROM " + dbname + ".companies" + " WHERE companyName LIKE '%" + searchString + "%';";
+                string query = "SELECT * FROM " + dbname + ".companies" + " WHERE companyName LIKE @Search;";
 
                 MySqlCommand command = new MySqlCommand(query, connection);
+                command.Parameters.AddWithValue("@Search", "%" + searchString + "%");
                 MySqlDataReader reader = command.ExecuteReader();
 
                 CompanyList ret = new CompanyList();

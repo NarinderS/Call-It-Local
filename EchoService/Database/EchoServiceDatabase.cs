@@ -45,11 +45,13 @@ namespace EchoService.Database
         {
             if(openConnection() == true)
             {
-                string query = @"INSERT INTO echoforward(timestamp, username, datain)" +
-                    @"VALUES('" + DateTimeOffset.Now.ToUnixTimeSeconds().ToString() +
-                    @"', '" + echo.username + @"', '" + echo.data + @"');";
+                string query = "INSERT INTO echoforward(timestamp, username, datain)" +
+                    "VALUES(@Timestamp,@Username,@Data);";
 
                 MySqlCommand command = new MySqlCommand(query, connection);
+                command.Parameters.AddWithValue("@Timestamp", DateTimeOffset.Now.ToUnixTimeSeconds().ToString());
+                command.Parameters.AddWithValue("@Username", echo.username);
+                command.Parameters.AddWithValue("@Data", echo.data);
                 command.ExecuteNonQuery();
 
                 closeConnection();
@@ -68,11 +70,13 @@ namespace EchoService.Database
         {
             if (openConnection() == true)
             {
-                string query = @"INSERT INTO echoreverse(timestamp, username, datain)" +
-                    @"VALUES('" + DateTimeOffset.Now.ToUnixTimeSeconds().ToString() +
-                    @"', '" + request.username + @"', '" + request.data + @"');";
+                string query = "INSERT INTO echoreverse(timestamp, username, datain)" +
+                    "VALUES(@Timestamp,@Username,@Data);";
 
                 MySqlCommand command = new MySqlCommand(query, connection);
+                command.Parameters.AddWithValue("@Timestamp", DateTimeOffset.Now.ToUnixTimeSeconds().ToString());
+                command.Parameters.AddWithValue("@Username", request.username);
+                command.Parameters.AddWithValue("@Data", request.data);
                 command.ExecuteNonQuery();
 
                 closeConnection();
